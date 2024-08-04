@@ -584,127 +584,137 @@ img {
   }
 }
 
-
-
-    .responsive-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: var(--mb-4);
+.responsive-table-container {
+      overflow-x: auto;
     }
 
-    .responsive-table th,
-    .responsive-table td {
-      padding: 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--text-color-light);
-    }
+  .responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--mb-4);
+  }
 
-    .responsive-table th {
-      background-color: var(--first-color);
-      color: var(--container-color);
-      position: relative;
-    }
+  .responsive-table th,
+  .responsive-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--text-color-light);
+  }
 
-    .responsive-table th .toggle-btn {
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: var(--container-color);
-      font-size: 1rem;
-      cursor: pointer;
-    }
+  .responsive-table th {
+    background-color: var(--first-color);
+    color: var(--container-color);
+    position: relative;
+  }
 
-    .responsive-table th.collapsed .toggle-btn::after {
-      content: '\25B6'; /* Right arrow */
-    }
+  .responsive-table th .toggle-btn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--container-color);
+    font-size: 1rem;
+    cursor: pointer;
+  }
 
-    .responsive-table th .toggle-btn::after {
-      content: '\25BC'; /* Down arrow */
-    }
+  .responsive-table th.collapsed .toggle-btn::after {
+    content: '\25B6'; /* Right arrow */
+  }
 
-    .responsive-table td.collapsed,
-    .responsive-table th.collapsed {
+  .responsive-table th .toggle-btn::after {
+    content: '\25BC'; /* Down arrow */
+  }
+
+  .responsive-table td.collapsed,
+  .responsive-table th.collapsed {
+    display: none;
+  }
+
+  /* Media queries for automatic hiding */
+  @media screen and (max-width: 768px) {
+    .responsive-table th:nth-child(3),
+    .responsive-table td:nth-child(3),
+    .responsive-table th:nth-child(4),
+    .responsive-table td:nth-child(4) {
       display: none;
     }
+  }
 
-    /* Media queries for automatic hiding */
-    @media screen and (max-width: 768px) {
-      .responsive-table th:nth-child(3),
-      .responsive-table td:nth-child(3),
-      .responsive-table th:nth-child(4),
-      .responsive-table td:nth-child(4) {
-        display: none;
+  @media screen and (max-width: 576px) {
+    .responsive-table th:nth-child(2),
+    .responsive-table td:nth-child(2) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+      .responsive-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
       }
     }
 
-    @media screen and (max-width: 576px) {
-      .responsive-table th:nth-child(2),
-      .responsive-table td:nth-child(2) {
-        display: none;
-      }
-    }
+  .reset-btn {
+    display: inline-block;
+    background-color: var(--first-color);
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
 
-    .reset-btn {
-      display: inline-block;
-      background-color: var(--first-color);
-      color: #fff;
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
-      transition: 0.3s;
-      cursor: pointer;
-      margin-bottom: 1rem;
-    }
+  .reset-btn:hover {
+    background-color: var(--first-color-alt);
+  }
 
-    .reset-btn:hover {
-      background-color: var(--first-color-alt);
-    }
+  .view-icon {
+    cursor: pointer;
+    color: var(--first-color);
+    text-align: center;
+  }
 
-    .view-icon {
-      cursor: pointer;
-      color: var(--first-color);
-      text-align: center;
-    }
+  .search-container {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-container {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
 
-    .search-container {
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-    }
-    
-    .search-container {
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
+  .search-container input[type="text"] {
+    padding: 0.75rem 2rem 0.75rem 2.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
 
-    .search-container input[type="text"] {
-      padding: 0.75rem 2rem 0.75rem 2.5rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      margin-right: 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
+  .search-container input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
 
-    .search-container input[type="text"]:focus {
-      border-color: #007bff;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      outline: none;
-    }
-
-    .search-container .search-icon {
-      position: absolute;
-      left: 0.75rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #007bff;
-    }
+  .search-container .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+  }
   </style>
 </head>
 <body>
@@ -733,6 +743,7 @@ img {
         <input type="text" id="search-input" placeholder="Search...">
         <button class="reset-btn" onclick="resetTable()">Reset Columns</button>
       </div>
+      <div class="responsive-table-container">
       <table class="responsive-table">
         <thead>
           <tr>
@@ -752,15 +763,16 @@ img {
             <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/yaseen_kodaivallale.html')"></i></td>
           </tr>
           <tr>
-            <td class="column-0">Another Song</td>
-            <td class="column-1">மறுபடி பாடல்</td>
-            <td class="column-2">Another Lyricist</td>
-            <td class="column-3">Another Praise</td>
-            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics-page.html')"></i></td>
+            <td class="column-0">Irappe Kodum Irappe</td>
+            <td class="column-1">இறப்பே கொடும் இறப்பே</td>
+            <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+            <td class="column-3">HHHH SHEIKH VAPPA NAYAGAM QUTHBUZZAMAN SHAMSUL VUJOODH JAMALIYA ASSEYED KHALEEL AWN MOWLANA EL HASANIYYUL HUSAINIYYUL HASHIMY ESQ</td>
+            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/irappe_kodum_irappe.html')"></i></td>
           </tr>
           <!-- Add more rows as needed -->
         </tbody>
       </table>
+    </div>
     </section>
   </main>
 
