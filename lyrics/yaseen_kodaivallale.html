@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Responsive Table with Collapsible Columns</title>
+</head>
+<style>
+    body {
+      margin: var(--header-height) 0 0 0;
+      font-family: var(--body-font);
+      font-size: var(--normal-font-size);
+      background-color: var(--body-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .lyrics-page {
+      padding: var(--mb-4) 0;
+    }
+
+    .lyrics-page h1 {
+      font-size: var(--h1-font-size);
+      color: var(--title-color);
+      text-align: center;
+      margin-bottom: var(--mb-3);
+    }
+
+    .lyrics-page .lyricist {
+      text-align: center;
+      font-size: var(--h2-font-size);
+      color: var(--text-color);
+      margin-bottom: var(--mb-4);
+    }
+
+    .lyrics-page .lyrics {
+      margin: 0 auto;
+      max-width: 800px;
+      padding: 1rem;
+      background-color: var(--container-color);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 0.5rem;
+      margin-bottom: var(--mb-4);
+    }
+
+    .lyrics-page .lyrics img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+    .lyrics-page textarea {
+      width: 100%;
+      height: 150px;
+      padding: 1rem;
+      font-size: var(--normal-font-size);
+      border: 1px solid var(--text-color-light);
+      border-radius: 0.5rem;
+      resize: vertical;
+      background: var(--container-color);
+      color: var(--text-color);
+    }
+
+    .lyrics-page .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      background: var(--container-color);
+      border-radius: 0.5rem;
+      margin-bottom: var(--mb-4);
+    }
+
+    .lyrics-page .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .lyrics-page .back-link {
+      display: inline-block;
+      background-color: var(--first-color);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      text-decoration: none;
+      font-size: var(--normal-font-size);
+      transition: background-color 0.3s;
+    }
+
+    .lyrics-page .back-link:hover {
+      background-color: var(--first-color-alt);
+    }
+  </style>
+</head>
+<body>
+  <header class="l-header">
+    <nav class="nav bd-container">
+      <a href="#" class="nav__logo"></a>
+      <div class="nav__toggle" id="nav-toggle">
+        <i class="bx bx-menu"></i>
+      </div>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="../index.html" class="nav__link active-link">Home</a></li>
+          <li class="nav__item"><a href="../lyrics.html" class="nav__link">Lyrics</a></li>
+        </ul>
+      </div>
+      <div class="change-theme" id="theme-button">
+        <i class="bx bx-moon"></i>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="lyrics-page bd-container">
+      <h1>Yaseen Kodai Vallale</h1>
+      <h1>யாஸீன் கொடைவள்ளலே!</h1>
+      <p class="lyricist">Lyricist: Ilangavi A.Naninar Mohamed Ansari Haqqiyathul Qadiriyah</p>
+      <div class="lyrics">
+        <img src="../lyrics/images/yaseen_kodaivallale.jpg" alt="Italian Trulli"> 
+      </div>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/nzVUwY2e3W0?si=9q4Fffd156c_pllP" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <a href="../index.html" class="back-link">Back to Home</a>
+    </section>
+  </main>
+</body>
+</html>

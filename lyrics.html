@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Responsive Table with Collapsible Columns</title>
+  <style>
+    /* Add these styles for the search bar */
+    .search-container {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-container {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .search-container input[type="text"] {
+      padding: 0.75rem 2rem 0.75rem 2.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .search-container input[type="text"]:focus {
+      border-color: #007bff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    .search-container .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #007bff;
+    }
+
+  </style>
+</head>
+<body>
+  <header class="l-header">
+    <nav class="nav bd-container">
+      <a href="#" class="nav__logo"></a>
+      <div class="nav__toggle" id="nav-toggle">
+        <i class="bx bx-menu"></i>
+      </div>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link active-link">Home</a></li>
+          <li class="nav__item"><a href="lyrics.html" class="nav__link">Lyrics</a></li>
+        </ul>
+      </div>
+      <div class="change-theme" id="theme-button">
+        <i class="bx bx-moon"></i>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section bd-container" id="responsive-table">
+      <h2 class="section-title">வரிகள் பேழை</h2>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search...">
+        <button class="reset-btn" onclick="resetTable()">Reset Columns</button>
+      </div>
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th><button class="toggle-btn" onclick="toggleColumn(0)"></button>Song Name (English)</th>
+            <th><button class="toggle-btn" onclick="toggleColumn(1)"></button>Song Name (Tamil)</th>
+            <th><button class="toggle-btn" onclick="toggleColumn(2)"></button>Lyricist</th>
+            <th><button class="toggle-btn" onclick="toggleColumn(3)"></button>In Praise Of</th>
+            <th><button class="toggle-btn" onclick="toggleColumn(4)"></button>View</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="column-0">Yaseen Kodai Vallale</td>
+            <td class="column-1">யாஸீன் கொடைவள்ளலே!</td>
+            <td class="column-2">Ilangavi A.Naninar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+            <td class="column-3">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/yaseen_kodaivallale.html')"></i></td>
+          </tr>
+          <tr>
+            <td class="column-0">Another Song</td>
+            <td class="column-1">மறுபடி பாடல்</td>
+            <td class="column-2">Another Lyricist</td>
+            <td class="column-3">Another Praise</td>
+            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics-page.html')"></i></td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    function toggleColumn(index) {
+      const headers = document.querySelectorAll('.responsive-table th');
+      const cells = document.querySelectorAll(`.responsive-table .column-${index}`);
+      
+      headers[index].classList.toggle('collapsed');
+      cells.forEach(cell => {
+        cell.classList.toggle('collapsed');
+      });
+    }
+
+    function resetTable() {
+      const headers = document.querySelectorAll('.responsive-table th');
+      const cells = document.querySelectorAll('.responsive-table td');
+
+      headers.forEach(header => header.classList.remove('collapsed'));
+      cells.forEach(cell => cell.classList.remove('collapsed'));
+    }
+
+    function viewLyrics(url) {
+      window.location.href = url;
+    }
+
+    // Add this script for filtering the table
+    document.getElementById('search-input').addEventListener('keyup', function() {
+      const filter = this.value.toLowerCase();
+      const rows = document.querySelectorAll('.responsive-table tbody tr');
+
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        let match = false;
+
+        cells.forEach(cell => {
+          if (cell.textContent.toLowerCase().includes(filter)) {
+            match = true;
+          }
+        });
+
+        row.style.display = match ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
