@@ -593,6 +593,7 @@ img {
     border-collapse: collapse;
     margin-bottom: var(--mb-4);
   }
+  .responsive-table th { cursor: pointer; }
 
   .responsive-table th,
   .responsive-table td {
@@ -605,6 +606,7 @@ img {
     background-color: var(--first-color);
     color: var(--container-color);
     position: relative;
+    padding-right: 3rem;
   }
 
   .responsive-table th .toggle-btn {
@@ -747,11 +749,31 @@ img {
       <table class="responsive-table">
         <thead>
           <tr>
-            <th><button class="toggle-btn" onclick="toggleColumn(0)"></button>Song Name (English)</th>
-            <th><button class="toggle-btn" onclick="toggleColumn(1)"></button>Song Name (Tamil)</th>
-            <th><button class="toggle-btn" onclick="toggleColumn(2)"></button>Lyricist</th>
-            <th><button class="toggle-btn" onclick="toggleColumn(3)"></button>In Praise Of</th>
-            <th><button class="toggle-btn" onclick="toggleColumn(4)"></button>View</th>
+            <th>
+              <button class="toggle-btn" onclick="toggleColumn(0)"></button>
+              Song Name (English)
+              <i class="sort-icon" onclick="sortTable(0)">↕</i>
+            </th>
+            <th>
+              <button class="toggle-btn" onclick="toggleColumn(1)"></button>
+              Song Name (Tamil)
+              <i class="sort-icon" onclick="sortTable(1)">↕</i>
+            </th>
+            <th>
+              <button class="toggle-btn" onclick="toggleColumn(2)"></button>
+              Lyricist
+              <i class="sort-icon" onclick="sortTable(2)">↕</i>
+            </th>
+            <th>
+              <button class="toggle-btn" onclick="toggleColumn(3)"></button>
+              In Praise/Remembrance Of
+              <i class="sort-icon" onclick="sortTable(3)">↕</i>
+            </th>
+            <th>
+              <button class="toggle-btn" onclick="toggleColumn(4)"></button>
+              View
+              <i class="sort-icon" onclick="sortTable(4)">↕</i>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -797,13 +819,129 @@ img {
           <td class="column-3">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
           <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/guruve_yaseen_ali_nathare.html')"></i></td>
         </tr>
+        <tr>
+          <td class="column-0">Kavithai Kadale</td>
+          <td class="column-1">கவிதைக் கடலே!</td>
+          <td class="column-2">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
+          <td class="column-3">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/kavithai_kadale.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Nabiye Em Oliye</td>
+          <td class="column-1">நபியே எம் ஒளியே</td>
+          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/nabiye_em_oliye.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Ninaivu Yaavum Ungal Meethu</td>
+          <td class="column-1">நினைவு யாவும் உங்கள் மீது யா ரஸூலல்லாஹ்ﷺ</td>
+          <td class="column-2">கலைமாமணி கவிஞர் நாகூர் ஸலீம்</td>
+          <td class="column-3">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ninaivu_yaavum_ungal_meethu.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Allahu Rabbe Allahu</td>
+          <td class="column-1">அல்லாஹு  ரப்பே அல்லாஹு</td>
+          <td class="column-2">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
+          <td class="column-3">Allah (S.W.T)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/allahoo_rabbe_allahoo.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Annal Ungal Anbai Naadi</td>
+          <td class="column-1">அண்ணல் உங்கள் அன்பை நாடி</td>
+          <td class="column-2">Al-Hafiz Mohammed Abubacker Siddiq Bilali, Mohammed Ashiq Bilali</td>
+          <td class="column-3">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/annal_ungal_anbai_naadi.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Marainthum Maraiyaamal</td>
+          <td class="column-1">மறைந்தும் மறையாமல்</td>
+          <td class="column-2">Muhibbul Ulama Alhaj A. Muhammad Ma'hroof</td>
+          <td class="column-3">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/marainthum_maraiyaamal.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Salli Ala Nabiyina</td>
+          <td class="column-1">சல்லி அலா நபியினா</td>
+          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/salli_ala_nabiyina.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Iraiye Iraiye</td>
+          <td class="column-1">இறையே இறையே</td>
+          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3">Allah (S.W.T)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/iraiye_iraiye.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Madeena Thendral</td>
+          <td class="column-1">மதீனா தென்றல்</td>
+          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/madeena_thendral.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Yaa Nabi - Yuvan - U1 Records</td>
+          <td class="column-1">யா நபி</td>
+          <td class="column-2">Rizwan</td>
+          <td class="column-3">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/yaa_nabi_u1.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Annale Ya Rasoole</td>
+          <td class="column-1">அண்ணலே யா ரசூலே</td>
+          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/annale_ya_rasoole.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Thozhuvoma</td>
+          <td class="column-1">தொழுவோமா</td>
+          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3">Allah (S.W.T)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/thozhuvoma.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Thiyaga Thiruvilake</td>
+          <td class="column-1">தியாக திரு விளக்கே</td>
+          <td class="column-2">SSA Wahid Ramanathapuram</td>
+          <td class="column-3">Karbala</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/thiyaga_thiruvilake.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Hajju Perunaal</td>
+          <td class="column-1">ஹஜ்ஜுப் பெருநாள்</td>
+          <td class="column-2">E.M. Haniffa</td>
+          <td class="column-3">Eid-ul-Adha</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/hajj_perunaal.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Ungal Arutpaatham (Yaseen Moulana (R.A))</td>
+          <td class="column-1">உங்கள் அருட்பாதம்(யாஸீன் மௌலானா(ர.அ))</td>
+          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ungal_arutpatham_yaseen_vappa.html')"></i></td>
+        </tr>
+        <tr>
+          <td class="column-0">Annai Sa'eedha (R.A) Irangarpa</td>
+          <td class="column-1">அன்னை ஸயீதா(ர.அ) இரங்கற்பா</td>
+          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3">Annai Sa'eedha (R.A)</td>
+          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/annai_sayeedha_ra_irangarpa.html')"></i></td>
+        </tr>
         </tbody>
       </table>
     </div>
     </section>
   </main>
 
-  <script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      sortTable(0);  // Sort by the first column (Song Name (English)) when the page loads
+    });
+  
     function toggleColumn(index) {
       const headers = document.querySelectorAll('.responsive-table th');
       const cells = document.querySelectorAll(`.responsive-table .column-${index}`);
@@ -813,34 +951,59 @@ img {
         cell.classList.toggle('collapsed');
       });
     }
-
+  
     function resetTable() {
       const headers = document.querySelectorAll('.responsive-table th');
       const cells = document.querySelectorAll('.responsive-table td');
-
+  
       headers.forEach(header => header.classList.remove('collapsed'));
       cells.forEach(cell => cell.classList.remove('collapsed'));
     }
-
+  
     function viewLyrics(url) {
       window.location.href = url;
     }
-
-    // Add this script for filtering the table
+  
+    let currentSortColumn = -1;
+    let currentSortDirection = 'asc';
+    
+    function sortTable(n) {
+      const table = document.querySelector('.responsive-table');
+      const rows = Array.from(table.querySelectorAll('tbody tr'));
+      let dir = currentSortColumn === n && currentSortDirection === 'asc' ? 'desc' : 'asc';
+    
+      rows.sort((a, b) => {
+        const x = a.cells[n].innerText.toLowerCase();
+        const y = b.cells[n].innerText.toLowerCase();
+        if (x < y) {
+          return dir === 'asc' ? -1 : 1;
+        }
+        if (x > y) {
+          return dir === 'asc' ? 1 : -1;
+        }
+        return 0;
+      });
+    
+      rows.forEach(row => table.querySelector('tbody').appendChild(row));
+    
+      currentSortColumn = n;
+      currentSortDirection = dir;
+    }
+  
     document.getElementById('search-input').addEventListener('keyup', function() {
       const filter = this.value.toLowerCase();
       const rows = document.querySelectorAll('.responsive-table tbody tr');
-
+  
       rows.forEach(row => {
         const cells = row.querySelectorAll('td');
         let match = false;
-
+  
         cells.forEach(cell => {
           if (cell.textContent.toLowerCase().includes(filter)) {
             match = true;
           }
         });
-
+  
         row.style.display = match ? '' : 'none';
       });
     });
