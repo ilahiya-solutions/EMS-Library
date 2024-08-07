@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="../assets/css/styles.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <title>EMS Lyrics World</title>
+      <style>
+         body {
+         margin: var(--header-height) 0 0 0;
+         font-family: var(--body-font);
+         font-size: var(--normal-font-size);
+         background-color: var(--body-color);
+         color: var(--text-color);
+         line-height: 1.6;
+         }
+         .lyrics-page {
+         padding: var(--mb-4) 0;
+         }
+         .lyrics-page h1 {
+         font-size: var(--h1-font-size);
+         color: var(--title-color);
+         text-align: center;
+         margin-bottom: var(--mb-3);
+         }
+         .lyrics-page .lyricist {
+         text-align: center;
+         font-size: var(--h2-font-size);
+         color: var(--text-color);
+         margin-bottom: var(--mb-3);
+         }
+         .lyrics-page .lyrics {
+         margin: 0 auto;
+         max-width: 800px;
+         padding: 1rem;
+         background-color: var(--container-color);
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         border-radius: 0.5rem;
+         margin-bottom: var(--mb-4);
+         }
+         .lyrics-page .lyrics img {
+         width: 100%;
+         height: auto;
+         border-radius: 0.5rem;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         }
+         .lyrics-page textarea {
+         width: 100%;
+         height: 150px;
+         padding: 1rem;
+         font-size: var(--normal-font-size);
+         border: 1px solid var(--text-color-light);
+         border-radius: 0.5rem;
+         resize: vertical;
+         background: var(--container-color);
+         color: var(--text-color);
+         }
+         .lyrics-page .video-container {
+         position: relative;
+         padding-bottom: 56.25%; /* 16:9 aspect ratio */
+         height: 0;
+         overflow: hidden;
+         max-width: 100%;
+         background: var(--container-color);
+         border-radius: 0.5rem;
+         margin-bottom: var(--mb-4);
+         }
+         .lyrics-page .video-container iframe {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         }
+         .lyrics-page .back-link {
+         display: inline-block;
+         background-color: var(--first-color);
+         color: #fff;
+         padding: 0.75rem 1.5rem;
+         border-radius: 0.5rem;
+         text-align: center;
+         text-decoration: none;
+         font-size: var(--normal-font-size);
+         transition: background-color 0.3s;
+         }
+         .lyrics-page .back-link:hover {
+         background-color: var(--first-color-alt);
+         }
+         .audio-container {
+         margin: 0 auto;
+         max-width: 800px;
+         padding: 1rem;
+         background-color: var(--container-color);
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         border-radius: 0.5rem;
+         margin-bottom: var(--mb-4);
+         }
+         /* Additional styles for the audio player */
+         #app-cover {
+         position: absolute;
+         top: 50%;
+         right: 0;
+         left: 0;
+         width: 430px;
+         height: 100px;
+         margin: -4px auto;
+         }
+         #bg-artwork {
+         position: fixed;
+         top: -30px;
+         right: -30px;
+         bottom: -30px;
+         left: -30px;
+         background-image: url("https://via.placeholder.com/500"); /* Generic image URL */
+         background-repeat: no-repeat;
+         background-size: cover;
+         background-position: 50%;
+         filter: blur(40px);
+         -webkit-filter: blur(40px);
+         z-index: 1;
+         }
+         #bg-layer {
+         position: fixed;
+         top: 0;
+         right: 0;
+         bottom: 0;
+         left: 0;
+         background-color: #fff;
+         opacity: 0.51;
+         z-index: 2;
+         }
+         #player {
+         position: relative;
+         height: 100%;
+         z-index: 3;
+         }
+         #player-track {
+         position: absolute;
+         top: 0;
+         right: 15px;
+         left: 15px;
+         padding: 13px 22px 10px 184px;
+         background-color: #fff7f7;
+         border-radius: 15px 15px 0 0;
+         transition: 0.3s ease top;
+         z-index: 1;
+         }
+         #player-track.active {
+         top: -92px;
+         }
+         #album-name {
+         color: #54576f;
+         font-size: 17px;
+         font-weight: bold;
+         }
+         #track-name {
+         color: #acaebd;
+         font-size: 13px;
+         margin: 2px 0 13px 0;
+         }
+         #track-time {
+         height: 12px;
+         margin-bottom: 3px;
+         overflow: hidden;
+         }
+         #current-time {
+         float: left;
+         }
+         #track-length {
+         float: right;
+         }
+         #current-time,
+         #track-length {
+         color: transparent;
+         font-size: 11px;
+         background-color: #ffe8ee;
+         border-radius: 10px;
+         transition: 0.3s ease all;
+         }
+         #track-time.active #current-time,
+         #track-time.active #track-length {
+         color: #f86d92;
+         background-color: transparent;
+         }
+         #s-area,
+         #seek-bar {
+         position: relative;
+         height: 4px;
+         border-radius: 4px;
+         }
+         #s-area {
+         background-color: #ffe8ee;
+         cursor: pointer;
+         }
+         #ins-time {
+         position: absolute;
+         top: -29px;
+         color: #fff;
+         font-size: 12px;
+         white-space: pre;
+         padding: 5px 6px;
+         border-radius: 4px;
+         display: none;
+         }
+         #s-hover {
+         position: absolute;
+         top: 0;
+         bottom: 0;
+         left: 0;
+         opacity: 0.2;
+         z-index: 2;
+         }
+         #ins-time,
+         #s-hover {
+         background-color: #3b3d50;
+         }
+         #seek-bar {
+         content: "";
+         position: absolute;
+         top: 0;
+         bottom: 0;
+         left: 0;
+         width: 0;
+         background-color: #fd6d94;
+         transition: 0.2s ease width;
+         z-index: 1;
+         }
+         #player-content {
+         position: relative;
+         height: 100%;
+         background-color: #fff;
+         box-shadow: 0 30px 80px #656565;
+         border-radius: 15px;
+         z-index: 2;
+         }
+         #album-art {
+         position: absolute;
+         top: -40px;
+         width: 115px;
+         height: 115px;
+         margin-left: 40px;
+         transform: rotateZ(0);
+         transition: 0.3s ease all;
+         box-shadow: 0 0 0 10px #fff;
+         border-radius: 50%;
+         overflow: hidden;
+         }
+         #album-art.active {
+         top: -60px;
+         box-shadow: 0 0 0 4px #fff7f7, 0 30px 50px -15px #afb7c1;
+         }
+         #album-art:before {
+         content: "";
+         position: absolute;
+         top: 50%;
+         right: 0;
+         left: 0;
+         width: 20px;
+         height: 20px;
+         margin: -10px auto 0 auto;
+         background-color: #d6dee7;
+         border-radius: 50%;
+         box-shadow: inset 0 0 0 2px #fff;
+         z-index: 2;
+         }
+         #album-art img {
+         display: block;
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         opacity: 0;
+         z-index: -1;
+         }
+         #album-art.active img {
+         opacity: 1;
+         transform: rotateZ(360deg);
+         transition: 0.8s ease all;
+         }
+         #player-controls {
+         position: absolute;
+         bottom: 0;
+         right: 15px;
+         left: 15px;
+         height: 85px;
+         padding: 10px 15px;
+         border-radius: 0 0 15px 15px;
+         background-color: #ffe8ee;
+         box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.4), 0 0 0 0 rgba(255, 255, 255, 0.4);
+         z-index: 2;
+         }
+         #player-controls.active {
+         background-color: #fff;
+         }
+         #playpause-btn,
+         #prev-btn,
+         #next-btn,
+         #volume {
+         display: inline-block;
+         width: 30px;
+         height: 30px;
+         margin: 0;
+         padding: 0;
+         font-size: 20px;
+         color: #ff8a8a;
+         cursor: pointer;
+         transition: 0.3s ease color;
+         }
+         #playpause-btn:hover,
+         #prev-btn:hover,
+         #next-btn:hover,
+         #volume:hover {
+         color: #fc3c72;
+         }
+         #volume {
+         font-size: 20px;
+         margin-left: 15px;
+         }
+         #volume-slider {
+         position: relative;
+         height: 4px;
+         width: 60px;
+         margin-left: 10px;
+         background-color: #ff8a8a;
+         border-radius: 4px;
+         cursor: pointer;
+         }
+         #volume-slider .volume-bar {
+         position: absolute;
+         top: 0;
+         bottom: 0;
+         left: 0;
+         width: 0;
+         background-color: #f86d92;
+         border-radius: 4px;
+         }
+         #volume-slider:hover .volume-bar {
+         background-color: #fc3c72;
+         }
+         #volume-bar {
+         display: block;
+         position: relative;
+         height: 4px;
+         border-radius: 4px;
+         background-color: #ff8a8a;
+         cursor: pointer;
+         }
+         #volume-bar .volume-bar {
+         position: absolute;
+         top: 0;
+         bottom: 0;
+         left: 0;
+         width: 0;
+         background-color: #f86d92;
+         border-radius: 4px;
+         z-index: 1;
+         }
+         #volume-bar:hover .volume-bar {
+         background-color: #fc3c72;
+         }
+         #player-buttons {
+         display: inline-block;
+         height: 30px;
+         margin: 0;
+         padding: 0;
+         font-size: 20px;
+         color: #ff8a8a;
+         cursor: pointer;
+         }
+         #player-buttons:hover {
+         color: #fc3c72;
+         }
+         .lyrics {
+         padding: 20px;
+         font-size: 18px;
+         line-height: 1.5;
+         background: #f4f4f4;
+         border-radius: 10px;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+         margin: 20px auto;
+         max-width: 800px;
+         overflow-y: auto;
+         }
+      </style>
+   </head>
+   <body>
+      <header class="l-header">
+         <nav class="nav bd-container">
+            <a href="#" class="nav__logo"></a>
+            <div class="nav__toggle" id="nav-toggle">
+               <i class="bx bx-menu"></i>
+            </div>
+            <div class="nav__menu" id="nav-menu">
+               <ul class="nav__list">
+                  <li class="nav__item"><a href="../index.html" class="nav__link active-link">Home</a></li>
+                  <li class="nav__item"><a href="../lyrics.html" class="nav__link">Lyrics</a></li>
+               </ul>
+            </div>
+            <div class="change-theme" id="theme-button">
+               <i class="bx bx-moon"></i>
+            </div>
+         </nav>
+      </header>
+      <main>
+         <section class="lyrics-page bd-container">
+            <h1>Poo Nabi Nesame</h1>
+            <h1>பூ நபி நேசமே - பூவிலே சுவாசமே</h1>
+            <h2 class="lyricist">Lyricist: ஐனுல் (Z)ஜாஹிரா ஆலிமா முஅஸ்கரிய்யா</h2>
+            <p class="lyricist">Tune: Original</p>
+            <div class="lyrics">
+               <h4>
+                  பூ நபி நேசமே<br>
+                  பூவிலே சுவாசமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br><br>
+                  பூ நபி நேசமே<br>
+                  பூவிலே சுவாசமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br><br>
+                  கண்மணி கண்மணி<br>
+                  எம் உயிர் கண்மணி<br>
+                  என்றும் உம் பாதமே<br>
+                  தேடும் அடைக்கலமே<br>
+                  என்றும் உம் பாதமே<br>
+                  தேடும் அடைக்கலமே<br>
+                  கண்மணி கண்மணி<br><br>
+                  ஒளியின் ஒளியேனும் திருவதனம் <br>
+                  நான் காணணும்<br>
+                  கருவின் உருவே உம் காதலிலே கரைந்தோடனும்<br><br>
+                  ஒளியின் ஒளியேனும் திருவதனம் <br>
+                  நான் காணணும்<br>
+                  கருவின் உருவே உம் காதலிலே கரைந்தோடனும்<br><br>
+                  தங்கள் பரிவில்லையே எங்கள் நிலை என்னவோ<br>
+                  உங்கள் கடைபார்வையே எங்கள்<br>
+                  உயர்வல்லவோ<br><br>
+                  உயிரே நிறைமதியே<br>
+                  செம்மலரே வருவீரே<br><br>
+                  பூ நபி நேசமே<br>
+                  பூவிலே சுவாசமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br><br>
+                  கண்மணி கண்மணி<br>
+                  எம் உயிர் கண்மணி<br>
+                  என்றும் உம் பாதமே<br>
+                  தேடும் அடைக்கலமே<br>
+                  என்றும் உம் பாதமே<br>
+                  தேடும் அடைக்கலமே<br>
+                  கண்மணி கண்மணி<br><br>
+                  அருளின் அருளான தங்கள் உயர் அருட்பார்வையில் <br>
+                  இருளின் இருளான எம் பவங்கள் கரைந்தோடனும்<br><br>
+                  அருளின் அருளான தங்கள் உயர் அருட்பார்வையில் <br>
+                  இருளின் இருளான எம் பவங்கள் கரைந்தோடனும்<br><br>
+                  தாங்கள் வரவில்லையே இங்கு நாம் இல்லையே<br>
+                  உங்கள் அருளாசியே எங்கள் வரமல்லவோ<br><br>
+                  கதிரே உயிர் தென்றலே எம் ஜீவனே வருவீரே<br>
+                  பூ நபி நேசமே<br>
+                  பூவிலே சுவாசமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br><br>
+                  கண்மணி கண்மணி<br>
+                  எம் உயிர் கண்மணி<br>
+                  என்றும் உம் பாதமே<br>
+                  தேடும் அடைக்கலமே<br>
+                  என்றும் உம் பாதமே<br>
+                  தேடும் அடைக்கலமே<br>
+                  கண்மணி கண்மணி<br><br>
+                  பூ நபி நேசமே<br>
+                  பூவிலே சுவாசமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br>
+                  நாளை மஹ்ஷரிலே<br>
+                  தங்கள் நிழல் வேண்டுமே<br><br>
+                  கண்மணி கண்மணி<br>
+                  எம் உயிர் கண்மணி<br>
+                  என்றும் உம் பாதமே<br>
+                  தேடும் அடைக்கலமே<br>
+                  என்றும் உம் பாதமே<br>
+                  தேடும் அடைக்கலமே<br>
+                  கண்மணி கண்மணி<br><br>
+               </h4>
+            </div>
+            <div class="audio-container">
+               <audio controls>
+                  <source src="../assets/audio/poonabi_nesame.mp3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+               </audio>
+            </div>
+            <a href="../lyrics.html" class="back-link">Back to Home</a>
+         </section>
+      </main>
+   </body>
+</html>
