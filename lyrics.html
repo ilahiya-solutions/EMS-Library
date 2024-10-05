@@ -586,8 +586,6 @@ img {
 
 .responsive-table-container {
       overflow-x: auto;
-      position: relative;
-      width: 100%; 
     }
 
   .responsive-table {
@@ -596,7 +594,7 @@ img {
     margin-bottom: var(--mb-4);
   }
   .responsive-table th { cursor: pointer; }
- 
+
   .responsive-table th,
   .responsive-table td {
     padding: 1rem;
@@ -720,28 +718,6 @@ img {
     color: #007bff;
   }
 
-  th, td {
-            padding: 10px;
-            border: 1px solid #ddd; /* Adds border to cells */
-        }
-        
-
-   /* Sticky styles for the first column */
-   th:first-child, td:first-child {
-            position: sticky;
-            left: 0;
-            background-color: #f0f0f0;
-            z-index: 2; /* Higher z-index for the first column */
-        }
-
-
-  /* Styles for the header */
-  th {
-      background-color: var(--first-color); /* Header background */
-      z-index: 4; /* Ensure headers are above the rows */
-  }
-
-
   </style>
 </head>
 <body>
@@ -774,7 +750,7 @@ img {
       <table class="responsive-table">
         <thead>
           <tr>
-            <th style="background-color: var(--first-color);">
+            <th>
               <button class="toggle-btn" onclick="toggleColumn(0)"></button>
               Song Name (English)
               <i class="sort-icon" onclick="sortTable(0)">↕</i>
@@ -794,7 +770,7 @@ img {
               In Praise/Remembrance Of
               <i class="sort-icon" onclick="sortTable(3)">↕</i>
             </th>
-            <th style="background-color: var(--first-color);">
+            <th>
               <button class="toggle-btn" onclick="toggleColumn(4)"></button>
               View
               <i class="sort-icon" onclick="sortTable(4)">↕</i>
