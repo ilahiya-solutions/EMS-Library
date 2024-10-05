@@ -586,6 +586,8 @@ img {
 
 .responsive-table-container {
       overflow-x: auto;
+      position: relative;
+      width: 100%; 
     }
 
   .responsive-table {
@@ -594,7 +596,7 @@ img {
     margin-bottom: var(--mb-4);
   }
   .responsive-table th { cursor: pointer; }
-
+ 
   .responsive-table th,
   .responsive-table td {
     padding: 1rem;
@@ -718,17 +720,26 @@ img {
     color: #007bff;
   }
 
-  th:first-child, td:first-child {
-    position: sticky;
-    left: 0;
-    z-index: 3; 
-}
+  th, td {
+            padding: 10px;
+            border: 1px solid #ddd; /* Adds border to cells */
+        }
+        
 
-th:last-child, td:last-child {
-    position: sticky;
-    right: 0;
-    z-index: 3; 
-}
+   /* Sticky styles for the first column */
+   th:first-child, td:first-child {
+            position: sticky;
+            left: 0;
+            background-color: #f0f0f0;
+            z-index: 2; /* Higher z-index for the first column */
+        }
+
+
+  /* Styles for the header */
+  th {
+      background-color: var(--first-color); /* Header background */
+      z-index: 4; /* Ensure headers are above the rows */
+  }
 
 
   </style>
@@ -802,13 +813,13 @@ th:last-child, td:last-child {
             <td class="column-0">Irappe Kodum Irappe</td>
             <td class="column-1">இறப்பே கொடும் இறப்பே</td>
             <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-            <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+            <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
             <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/irappe_kodum_irappe.html')"></i></td>
           </tr>
           <tr>
             <td class="column-0">Ya Nabiyallah</td>
             <td class="column-1">யா நபியல்லாஹ்!</td>
-            <td class="column-2">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+            <td class="column-2">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
             <td class="column-3">Prophet Muhammad (ﷺ)</td>
             <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ya_nabiyallah_ya_rasoolallah.html')"></i></td>
           </tr>
@@ -970,21 +981,21 @@ th:last-child, td:last-child {
           <td class="column-0">Khaleel Naathar Thangal</td>
           <td class="column-1">கலீல் நாதர் தங்கள்</td>
           <td class="column-2">M Abdul Subahan Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
           <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/khaleel_naathar_thangal.html')"></i></td>
         </tr>
         <tr>
           <td class="column-0">Aaruyir Guru Naathare</td>
           <td class="column-1">ஆருயிர் குரு நாதரே</td>
           <td class="column-2">Moulavi S.Peer Mohamed Yaseeni Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
           <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/aaruyir_guru_naathare.html')"></i></td>
         </tr>
         <tr>
           <td class="column-0">Naatha Naatha</td>
           <td class="column-1">நாதா நாதா</td>
           <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
           <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/naatha_naatha.html')"></i></td>
         </tr>
         <tr>
@@ -1005,7 +1016,7 @@ th:last-child, td:last-child {
           <td class="column-0">Naatharam Khaleel Awnin Naamam Koorungal</td>
           <td class="column-1">நாதராம் கலீல் அவ்னின் நாமம் கூறுங்கள்</td>
           <td class="column-2">U. Zahir Hussain Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
           <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/naatharam_khaleel_awnin.html')"></i></td>
         </tr>
         <tr>
@@ -1019,7 +1030,7 @@ th:last-child, td:last-child {
           <td class="column-0">Mannar Khaleel Awn Em Guruve</td>
           <td class="column-1">மன்னர் கலீல் அவ்ன் எம்குருவே</td>
           <td class="column-2">கலீஃபா M.முஹம்மது முஸ்தபா ஹக்கிய்யுல் காதிரிய்</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
           <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/mannar_khaleel_awn_em_guruve.html')"></i></td>
         </tr>
         <tr>
@@ -1040,7 +1051,7 @@ th:last-child, td:last-child {
           <td class="column-0">Kannadi Guruve</td>
           <td class="column-1">கண்ணாடி குருவே</td>
           <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
           <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/kannadi_guruve.html')"></i></td>
         </tr>
         <tr>
@@ -1054,7 +1065,7 @@ th:last-child, td:last-child {
           <td class="column-0">Engal Awn Naayagam</td>
           <td class="column-1">எங்கள் அவ்ன் நாயகம்</td>
           <td class="column-2">செய்யிது மாதிஹ் மௌலானா</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq</td>
+          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
           <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/engal_awn_naayagam.html')"></i></td>
         </tr>
         <tr>

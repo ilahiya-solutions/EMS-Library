@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --first-color: #f0f0f0; /* Example header color */
+            --mb-4: 1rem; /* Example margin bottom */
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .responsive-table-container {
+            overflow-x: auto; /* Enables horizontal scrolling */
+            position: relative;
+            width: 100%; /* Full width of the parent container */
+        }
+
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--mb-4); /* Bottom margin */
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd; /* Adds border to cells */
+            white-space: nowrap; /* Prevents wrapping */
+        }
+
+        /* Sticky styles for the first column */
+        th:first-child, td:first-child {
+            position: sticky;
+            left: 0;
+            background-color: var(--first-color); /* Same as header background */
+            z-index: 2; /* Higher z-index for the first column */
+        }
+
+        /* Styles for the last column (View icon) */
+        th:last-child, td:last-child {
+            position: sticky;
+            right: 0;
+            background-color: var(--first-color); /* Same as header background */
+            z-index: 2; /* Higher z-index for the last column */
+        }
+
+        /* Styles for the header */
+        th {
+            background-color: var(--first-color); /* Header background */
+            z-index: 4; /* Ensure headers are above the rows */
+        }
+    </style>
+</head>
+<body>
+    <div class="responsive-table-container">
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>Song Name (English)</th>
+                    <th>Song Name (Tamil)</th>
+                    <th>Lyricist</th>
+                    <th>In Praise/Remembrance Of</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fixed Column 1</td>
+                    <td>Row 1, Col 2</td>
+                    <td>Row 1, Col 3</td>
+                    <td>Row 1, Col 4</td>
+                    <td>👁</td>
+                </tr>
+                <tr>
+                    <td>Fixed Column 1</td>
+                    <td>Row 2, Col 2</td>
+                    <td>Row 2, Col 3</td>
+                    <td>Row 2, Col 4</td>
+                    <td>👁</td>
+                </tr>
+                <tr>
+                    <td>Fixed Column 1</td>
+                    <td>Row 3, Col 2</td>
+                    <td>Row 3, Col 3</td>
+                    <td>Row 3, Col 4</td>
+                    <td>👁</td>
+                </tr>
+                <tr>
+                    <td>Fixed Column 1</td>
+                    <td>Row 4, Col 2</td>
+                    <td>Row 4, Col 3</td>
+                    <td>Row 4, Col 4</td>
+                    <td>👁</td>
+                </tr>
+                <tr>
+                    <td>Fixed Column 1</td>
+                    <td>Row 5, Col 2</td>
+                    <td>Row 5, Col 3</td>
+                    <td>Row 5, Col 4</td>
+                    <td>👁</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
