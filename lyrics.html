@@ -717,6 +717,20 @@ img {
     transform: translateY(-50%);
     color: #007bff;
   }
+
+  th:first-child, td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 3; 
+}
+
+th:last-child, td:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 3; 
+}
+
+
   </style>
 </head>
 <body>
@@ -749,7 +763,7 @@ img {
       <table class="responsive-table">
         <thead>
           <tr>
-            <th>
+            <th style="background-color: var(--first-color);">
               <button class="toggle-btn" onclick="toggleColumn(0)"></button>
               Song Name (English)
               <i class="sort-icon" onclick="sortTable(0)">↕</i>
@@ -769,7 +783,7 @@ img {
               In Praise/Remembrance Of
               <i class="sort-icon" onclick="sortTable(3)">↕</i>
             </th>
-            <th>
+            <th style="background-color: var(--first-color);">
               <button class="toggle-btn" onclick="toggleColumn(4)"></button>
               View
               <i class="sort-icon" onclick="sortTable(4)">↕</i>
