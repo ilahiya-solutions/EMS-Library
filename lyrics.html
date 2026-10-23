@@ -514,7 +514,42 @@
     </section>
   </main>
     <script>
+    /* ---------- preserve search/filters/scroll across a song visit ---------- */
+    function saveTableState() {
+      try {
+        const topics = Array.from(document.querySelectorAll('[data-topic][aria-pressed="true"]'))
+          .map(chip => chip.getAttribute('data-topic'));
+        const hiddenColumns = Array.from(document.querySelectorAll('[data-column-toggle][aria-pressed="false"]'))
+          .map(chip => chip.getAttribute('data-column-toggle'));
+        sessionStorage.setItem('ems-lyrics-return-state', JSON.stringify({
+          query: document.getElementById('search-input').value,
+          topics: topics,
+          hiddenColumns: hiddenColumns,
+          scrollY: window.scrollY,
+        }));
+      } catch (e) {}
+    }
+
+    function restoreTableState() {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem('ems-lyrics-return-state') || 'null');
+        if (!saved) return;
+
+        if (saved.query) document.getElementById('search-input').value = saved.query;
+        (saved.topics || []).forEach(topic => {
+          const chip = document.querySelector(`[data-topic="${topic}"]`);
+          if (chip) chip.click(); // toggles state + re-runs applyTableFilters via its own handler
+        });
+        (saved.hiddenColumns || []).forEach(index => toggleColumn(index, false));
+
+        applyTableFilters();
+        window.scrollTo(0, saved.scrollY || 0);
+        sessionStorage.removeItem('ems-lyrics-return-state');
+      } catch (e) {}
+    }
+
     function viewLyrics(url) {
+      saveTableState();
       window.location.href = url;
     }
 
@@ -654,6 +689,7 @@
 
     document.addEventListener('DOMContentLoaded', function () {
       sortTable(0);
+      restoreTableState();
     });
   </script>
   <script src="assets/js/theme.js"></script>
