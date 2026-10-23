@@ -95,10 +95,10 @@ html {
 }
 
 /*========== Button Dark/Light ==========*/
+/* Lives inline in the header (beside the search bar / before the hamburger)
+   on every breakpoint now, not hidden inside the collapsible mobile menu -
+   it's a display preference people expect instant access to. */
 .change-theme {
-  position: absolute;
-  right: 1rem;
-  top: 1.8rem;
   color: var(--text-color);
   font-size: 1rem;
   cursor: pointer;
@@ -187,6 +187,18 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
+}
+
+/* The search form had no sizing rules of its own; as a flex item its
+   default min-width:auto stopped it (and the input inside it) from
+   shrinking below content size, which could overflow the header and
+   crowd out the hamburger button on narrow phones. */
+.nav .example {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 320px;
+  margin: 0 0.75rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -195,17 +207,38 @@ img {
     top: var(--header-height);
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
     background-color: var(--first-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: var(--mb-6);
+    overflow-y: auto;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
   .nav__menu.show-menu {
     transform: translateX(0);
+  }
+
+  /* The panel's background is the brand green; the default grey link
+     colour (and the green "active" colour) are both low-contrast or
+     invisible against it. */
+  .nav__menu .nav__link {
+    color: #fff;
+  }
+  .nav__menu .nav__link:hover {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .nav__menu .nav__link.active-link {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+  }
+  .nav__menu .nav__item {
+    font-size: 1.1rem;
   }
 }
 
@@ -548,7 +581,6 @@ img {
   }
 
   .change-theme {
-    position: initial;
     margin-left: var(--mb-2);
   }
 
@@ -651,6 +683,17 @@ input:focus-visible,
   padding: 0;
 }
 
+/* Pages without a flex-growing search box (lyrics pages) need an explicit
+   push to keep the toggle + theme button pinned together at the right
+   edge, instead of `justify-content: space-between` spacing them out
+   evenly across the header. */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
 /* Book cards are unavailable-aware. */
 .menu__content[data-unavailable="true"] .menu__img {
   opacity: 0.5;
@@ -690,6 +733,8 @@ input:focus-visible,
   .nav .example {
     order: 3;
     width: 100%;
+    max-width: none;
+    margin: 0;
   }
 }
 

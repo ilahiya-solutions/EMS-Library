@@ -57,14 +57,15 @@
             <li class="nav__item">
               <a href="#qaseedahs" class="nav__link">Qaseedahs</a>
             </li>
-
-            <li>
-              <button type="button" class="change-theme" id="theme-button" aria-pressed="false" aria-label="Switch to dark theme">
-                <i class="bx bx-moon"></i>
-              </button>
-            </li>
           </ul>
         </div>
+
+        <!-- Always visible beside the search bar: it's a display
+             preference people expect instant access to, not a nav
+             destination, so it shouldn't be buried in the hamburger menu. -->
+        <button type="button" class="change-theme" id="theme-button" aria-pressed="false" aria-label="Switch to dark theme">
+          <i class="bx bx-moon"></i>
+        </button>
 
         <div class="nav__toggle" id="nav-toggle" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false">
           <i class="bx bx-menu"></i>

@@ -5,10 +5,20 @@ const showMenu = (toggleId, navId) => {
 
   // Validate that variables exist
   if (toggle && nav) {
-    const toggleMenu = () => {
-      const isOpen = nav.classList.toggle("show-menu");
+    const icon = toggle.querySelector("i");
+
+    const setOpen = (isOpen) => {
+      nav.classList.toggle("show-menu", isOpen);
       toggle.setAttribute("aria-expanded", String(isOpen));
+      if (icon) {
+        icon.classList.toggle("bx-menu", !isOpen);
+        icon.classList.toggle("bx-x", isOpen);
+      }
+      // Stop the page scrolling behind the full-screen mobile menu.
+      document.body.style.overflow = isOpen ? "hidden" : "";
     };
+    const toggleMenu = () => setOpen(!nav.classList.contains("show-menu"));
+
     toggle.addEventListener("click", toggleMenu);
     toggle.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -16,6 +26,25 @@ const showMenu = (toggleId, navId) => {
         toggleMenu();
       }
     });
+
+    // Close on Escape, or by tapping/clicking outside the open panel.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && nav.classList.contains("show-menu")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    document.addEventListener("click", (e) => {
+      if (
+        nav.classList.contains("show-menu") &&
+        !nav.contains(e.target) &&
+        !toggle.contains(e.target)
+      ) {
+        setOpen(false);
+      }
+    });
+
+    showMenu.close = () => setOpen(false);
   }
 };
 showMenu("nav-toggle", "nav-menu");
@@ -24,9 +53,8 @@ showMenu("nav-toggle", "nav-menu");
 const navLink = document.querySelectorAll(".nav__link");
 
 function linkAction() {
-  const navMenu = document.getElementById("nav-menu");
   // When we click on each nav__link, we remove the show-menu class
-  navMenu.classList.remove("show-menu");
+  if (showMenu.close) showMenu.close();
 }
 navLink.forEach((n) => n.addEventListener("click", linkAction));
 
