@@ -1,12 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("selected-theme");
+        if (t === "dark") document.documentElement.classList.add("dark-theme");
+        else if (t === "light") document.documentElement.classList.add("light-theme");
+      } catch (e) {}
+    })();
+  </script>
+  <meta name="color-scheme" content="light dark">
       <link rel="stylesheet" href="../assets/css/styles.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <title>EMS Lyrics World</title>
-   </head>
+     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
+</head>
    <style>
       body {
       margin: var(--header-height) 0 0 0;
@@ -89,12 +100,13 @@
       background-color: var(--first-color-alt);
       }
    </style>
-   </head>
+     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
+</head>
    <body>
       <header class="l-header">
          <nav class="nav bd-container">
             <a href="#" class="nav__logo"></a>
-            <div class="nav__toggle" id="nav-toggle">
+            <div class="nav__toggle" id="nav-toggle" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false">
                <i class="bx bx-menu"></i>
             </div>
             <div class="nav__menu" id="nav-menu">
@@ -103,9 +115,7 @@
                   <li class="nav__item"><a href="../lyrics.html" class="nav__link">Lyrics</a></li>
                </ul>
             </div>
-            <div class="change-theme" id="theme-button">
-               <i class="bx bx-moon"></i>
-            </div>
+            <button type="button" class="change-theme" id="theme-button" aria-pressed="false" aria-label="Switch to dark theme"><i class="bx bx-moon"></i></button>
          </nav>
       </header>
       <main>
@@ -165,5 +175,7 @@
             <a href="../lyrics.html" class="back-link">Back to Home</a>
          </section>
       </main>
-   </body>
+     <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
 </html>

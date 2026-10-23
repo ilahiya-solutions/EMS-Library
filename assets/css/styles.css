@@ -13,6 +13,10 @@
   --text-color-light: #a6a6a6;
   --body-color: #fbfefd;
   --container-color: #ffffff;
+  --border-color: #e0e0e0;
+  --input-bg: #ffffff;
+  --danger-color: #c0392b;
+  color-scheme: light;
 
   /*========== Font and typography ==========*/
   --body-font: "Poppins", sans-serif;
@@ -65,11 +69,29 @@ html {
 }
 
 /*========== Variables Dark theme ==========*/
-body.dark-theme {
+/* System preference is the default when the user hasn't chosen explicitly. */
+@media screen and (prefers-color-scheme: dark) {
+  :root:not(.light-theme) {
+    --title-color: #f1f3f2;
+    --text-color: #c7d1cc;
+    --text-color-light: #8a9690;
+    --body-color: #1d2521;
+    --container-color: #27302c;
+    --border-color: #3a453f;
+    --input-bg: #27302c;
+    color-scheme: dark;
+  }
+}
+/* Explicit user choice (persisted in localStorage) always wins. */
+:root.dark-theme {
   --title-color: #f1f3f2;
   --text-color: #c7d1cc;
+  --text-color-light: #8a9690;
   --body-color: #1d2521;
   --container-color: #27302c;
+  --border-color: #3a453f;
+  --input-bg: #27302c;
+  color-scheme: dark;
 }
 
 /*========== Button Dark/Light ==========*/
@@ -181,6 +203,9 @@ img {
     justify-content: center;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
+  }
+  .nav__menu.show-menu {
+    transform: translateX(0);
   }
 }
 
@@ -574,4 +599,132 @@ img {
   .home__container {
     height: 640px;
   }
+}
+
+/*========== ACCESSIBILITY / THEME HARDENING ==========*/
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  background: var(--first-color);
+  color: #fff;
+  border-radius: 0 0 0.5rem 0;
+}
+.skip-link:focus {
+  left: 0;
+  top: var(--header-height);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--first-color);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* The theme button is a real <button> now; strip default chrome. */
+.change-theme {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Book cards are unavailable-aware. */
+.menu__content[data-unavailable="true"] .menu__img {
+  opacity: 0.5;
+}
+.menu__unavailable-badge {
+  display: inline-block;
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-semi-bold);
+  color: #fff;
+  background-color: var(--danger-color);
+  border-radius: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  margin-top: 0.25rem;
+}
+
+/* Search box: was relying on browser defaults (white bg/black text always),
+   which produced a white patch in dark mode. */
+#myInput,
+.search-container input[type="text"] {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+#myInput::placeholder,
+.search-container input[type="text"]::placeholder {
+  color: var(--text-color-light);
+}
+
+/* Responsive: keep the header from overflowing on narrow phones. */
+@media screen and (max-width: 420px) {
+  .nav {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0.5rem 0;
+    row-gap: 0.5rem;
+  }
+  .nav .example {
+    order: 3;
+    width: 100%;
+  }
+}
+
+/* Touch targets */
+.change-theme,
+.scrolltop,
+.menu__button {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .nav__toggle is responsively shown/hidden via `display` elsewhere
+   (flex on mobile by default, none from 768px up) - pad it for a 44px
+   tap target instead of forcing `display` here, which would override
+   that breakpoint rule. */
+.nav__toggle {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.6rem;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 767px) {
+  .nav__toggle {
+    display: flex;
+  }
+}
+
+.menu__content {
+  min-width: 0;
+}
+.menu__img {
+  max-width: 100%;
+  height: auto;
 }

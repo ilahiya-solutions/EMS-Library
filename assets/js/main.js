@@ -5,9 +5,16 @@ const showMenu = (toggleId, navId) => {
 
   // Validate that variables exist
   if (toggle && nav) {
-    toggle.addEventListener("click", () => {
-      // We add the show-menu class to the div tag with the nav__menu class
-      nav.classList.toggle("show-menu");
+    const toggleMenu = () => {
+      const isOpen = nav.classList.toggle("show-menu");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    };
+    toggle.addEventListener("click", toggleMenu);
+    toggle.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleMenu();
+      }
     });
   }
 };
@@ -65,41 +72,8 @@ function scrollTop() {
 }
 window.addEventListener("scroll", scrollTop);
 
-/*==================== DARK LIGHT THEME ====================*/
-const themeButton = document.getElementById("theme-button");
-const darkTheme = "dark-theme";
-const iconTheme = "bx-sun";
-
-// Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem("selected-theme");
-const selectedIcon = localStorage.getItem("selected-icon");
-
-// We obtain the current theme that the interface has by validating the dark-theme class
-const getCurrentTheme = () =>
-  document.body.classList.contains(darkTheme) ? "dark" : "light";
-const getCurrentIcon = () =>
-  themeButton.classList.contains(iconTheme) ? "bx-moon" : "bx-sun";
-
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-  document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
-    darkTheme
-  );
-  themeButton.classList[selectedIcon === "bx-moon" ? "add" : "remove"](
-    iconTheme
-  );
-}
-
-// Activate / deactivate the theme manually with the button
-themeButton.addEventListener("click", () => {
-  // Add or remove the dark / icon theme
-  document.body.classList.toggle(darkTheme);
-  themeButton.classList.toggle(iconTheme);
-  // We save the theme and the current icon that the user chose
-  localStorage.setItem("selected-theme", getCurrentTheme());
-  localStorage.setItem("selected-icon", getCurrentIcon());
-});
+/* Theme toggle now lives in assets/js/theme.js (single authoritative
+   implementation, shared by every page). */
 
 /*==================== SCROLL REVEAL ANIMATION ====================*/
 /*
@@ -120,3 +94,65 @@ sr.reveal(`.home__data, .home__img,
 })
 
 */
+
+/*==================== CATALOGUE ACCESSIBLE NAMES ====================*/
+// Gives every book card's link(s)/image an accessible name derived from its
+// title, instead of editing alt="" on ~90 hand-authored cards individually.
+document.querySelectorAll(".menu__content").forEach(function (card) {
+  var h3 = card.querySelector(".menu__name");
+  if (!h3) return;
+  var label = h3.textContent.replace(/\s+/g, " ").trim();
+  var lang = card.querySelector(".menu__preci");
+  var full = lang && lang.textContent.trim() ? label + " (" + lang.textContent.trim() + ")" : label;
+  card.querySelectorAll("a").forEach(function (a) {
+    if (!a.getAttribute("aria-label")) a.setAttribute("aria-label", "Open " + full);
+  });
+  var img = card.querySelector(".menu__img");
+  if (img && !img.getAttribute("alt")) img.setAttribute("alt", full + " cover");
+});
+
+/*==================== OPEN BOOKS IN THE READER ====================*/
+(function () {
+  var grid = document.getElementById("myUL");
+  var searchInput = document.getElementById("myInput");
+  if (!grid) return;
+
+  grid.addEventListener("click", function (e) {
+    var link = e.target.closest('a[href$=".pdf"]');
+    if (!link || !grid.contains(link)) return;
+    var card = link.closest(".menu__content");
+    var titleEl = card && card.querySelector(".menu__name");
+    var langEl = card && card.querySelector(".menu__preci");
+    var title = titleEl ? titleEl.textContent.replace(/\s+/g, " ").trim() : "";
+    var lang = langEl ? langEl.textContent.trim() : "";
+
+    try {
+      sessionStorage.setItem(
+        "ems-return-state",
+        JSON.stringify({ query: searchInput ? searchInput.value : "", scrollY: window.scrollY })
+      );
+    } catch (err) {}
+
+    e.preventDefault();
+    var url =
+      "reader.html?src=" + encodeURIComponent(link.getAttribute("href")) +
+      "&title=" + encodeURIComponent(title) +
+      "&meta=" + encodeURIComponent(lang);
+    window.location.href = url;
+  });
+
+  // Restore search query + scroll position when coming back from the reader.
+  window.addEventListener("DOMContentLoaded", function () {
+    try {
+      var saved = JSON.parse(sessionStorage.getItem("ems-return-state") || "null");
+      if (saved) {
+        if (searchInput && saved.query) {
+          searchInput.value = saved.query;
+          if (typeof myFunction === "function") myFunction();
+        }
+        window.scrollTo(0, saved.scrollY || 0);
+        sessionStorage.removeItem("ems-return-state");
+      }
+    } catch (err) {}
+  });
+})();

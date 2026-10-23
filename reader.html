@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+
+  <!--========== THEME BOOTSTRAP (avoids a flash of the wrong theme) ==========-->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("selected-theme");
+        if (t === "dark") document.documentElement.classList.add("dark-theme");
+        else if (t === "light") document.documentElement.classList.add("light-theme");
+      } catch (e) {}
+    })();
+  </script>
+
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>EMS Library Reader</title>
+
+  <style>
+    body.reader-body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+      height: 100vh;
+      overflow: hidden;
+      background-color: var(--body-color);
+      color: var(--text-color);
+    }
+
+    .reader-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1rem;
+      background-color: var(--container-color);
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .reader-back {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 0 0.5rem;
+      color: var(--text-color);
+      font-weight: var(--font-medium);
+      border-radius: 0.4rem;
+    }
+    .reader-back:hover { color: var(--first-color); }
+
+    .reader-title-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+    .reader-title {
+      font-size: var(--h3-font-size);
+      color: var(--title-color);
+      font-weight: var(--font-semi-bold);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .reader-subtitle {
+      display: block;
+      font-size: var(--smaller-font-size);
+      color: var(--text-color-light);
+    }
+
+    .reader-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0.75rem;
+      background-color: var(--container-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .reader-toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .reader-toolbar button,
+    .reader-toolbar a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0 0.6rem;
+      border: 1px solid var(--border-color);
+      border-radius: 0.4rem;
+      background-color: var(--body-color);
+      color: var(--text-color);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .reader-toolbar button:hover,
+    .reader-toolbar a:hover {
+      border-color: var(--first-color);
+      color: var(--first-color);
+    }
+    .reader-toolbar button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    #page-input {
+      width: 3.2rem;
+      min-height: 44px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      border-radius: 0.4rem;
+      background-color: var(--input-bg);
+      color: var(--text-color);
+    }
+
+    .reader-viewport {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: auto;
+      background-color: var(--body-color);
+      position: relative;
+    }
+
+    .reader-status {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .reader-spinner {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 4px solid var(--border-color);
+      border-top-color: var(--first-color);
+      border-radius: 50%;
+      animation: reader-spin 0.8s linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reader-spinner { animation: none; }
+    }
+    @keyframes reader-spin {
+      to { transform: rotate(360deg); }
+    }
+    .reader-status a.button,
+    .reader-status button {
+      display: inline-block;
+      min-height: 44px;
+      padding: 0.6rem 1.25rem;
+    }
+
+    .reader-pages {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .reader-page {
+      position: relative;
+      width: min(100%, 900px);
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+    .reader-page canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .reader-page-label {
+      position: absolute;
+      bottom: 0.4rem;
+      right: 0.4rem;
+      font-size: 0.7rem;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      padding: 0.1rem 0.4rem;
+      border-radius: 0.3rem;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="reader-body">
+  <header class="reader-header">
+    <a href="index.html" class="reader-back" id="reader-back" aria-label="Back to the library">
+      <i class="bx bx-arrow-back" aria-hidden="true"></i><span>Library</span>
+    </a>
+    <div class="reader-title-wrap">
+      <h1 class="reader-title" id="reader-title">Loading…</h1>
+      <span class="reader-subtitle" id="reader-subtitle"></span>
+    </div>
+    <button type="button" class="change-theme" id="theme-button" aria-pressed="false" aria-label="Switch to dark theme">
+      <i class="bx bx-moon" aria-hidden="true"></i>
+    </button>
+  </header>
+
+  <div class="reader-toolbar" role="toolbar" aria-label="PDF controls">
+    <div class="reader-toolbar-group">
+      <button type="button" id="prev-page" aria-label="Previous page"><i class="bx bx-chevron-left" aria-hidden="true"></i></button>
+      <span class="reader-page-indicator">
+        <label for="page-input" class="visually-hidden">Current page</label>
+        <input type="number" id="page-input" min="1" value="1" inputmode="numeric"> / <span id="page-count">–</span>
+      </span>
+      <button type="button" id="next-page" aria-label="Next page"><i class="bx bx-chevron-right" aria-hidden="true"></i></button>
+    </div>
+    <div class="reader-toolbar-group">
+      <button type="button" id="zoom-out" aria-label="Zoom out"><i class="bx bx-minus" aria-hidden="true"></i></button>
+      <span id="zoom-level" aria-live="polite">100%</span>
+      <button type="button" id="zoom-in" aria-label="Zoom in"><i class="bx bx-plus" aria-hidden="true"></i></button>
+      <button type="button" id="fit-width" aria-label="Fit page to width">Width</button>
+      <button type="button" id="fit-page" aria-label="Fit whole page">Page</button>
+    </div>
+    <div class="reader-toolbar-group">
+      <a id="download-link" aria-label="Download PDF" download hidden><i class="bx bx-download" aria-hidden="true"></i></a>
+      <a id="fallback-link" aria-label="Open original PDF in a new tab" target="_blank" rel="noopener" hidden><i class="bx bx-link-external" aria-hidden="true"></i></a>
+    </div>
+  </div>
+
+  <main class="reader-viewport" id="reader-viewport">
+    <div class="reader-status" id="reader-status">
+      <div class="reader-spinner" aria-hidden="true"></div>
+      <p id="reader-status-text">Loading document…</p>
+      <button type="button" id="retry-button" class="button" hidden>Retry</button>
+    </div>
+    <div class="reader-pages" id="reader-pages" hidden></div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/reader.js"></script>
+</body>
+</html>

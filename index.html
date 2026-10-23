@@ -3,37 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!--========== THEME BOOTSTRAP (avoids a flash of the wrong theme) ==========-->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("selected-theme");
+          if (t === "dark") document.documentElement.classList.add("dark-theme");
+          else if (t === "light") document.documentElement.classList.add("light-theme");
+        } catch (e) {}
+      })();
+    </script>
 
     <!--========== BOX ICONS ==========-->
     <link
       href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
     <!--========== CSS ==========-->
     <link rel="stylesheet" href="assets/css/styles.css" />
-     <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
 
     <title>EMS Kithab, Books and Qaseedahs</title>
   </head>
   <body>
+    <a class="skip-link" href="#kithab">Skip to catalogue</a>
     <!--========== SCROLL TOP ==========-->
-    <a href="#" class="scrolltop" id="scroll-top">
+    <a href="#" class="scrolltop" id="scroll-top" aria-label="Back to top">
       <i class="bx bx-chevron-up scrolltop__icon"></i>
     </a>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--========== HEADER ==========-->
     <header class="l-header" id="header">
       <nav class="nav bd-container">
         <a href="#" class="nav__logo">EMS Library</a>
-        
-        <form class="example" action="action_page.php">
-          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." name="search">
+
+        <form class="example" onsubmit="return false;" role="search">
+          <label for="myInput" class="visually-hidden">Search books</label>
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." name="search" autocomplete="off">
       </form>
       <div class="nav__menu" id="nav-menu">
            <ul class="nav__list">
@@ -47,11 +58,15 @@
               <a href="#qaseedahs" class="nav__link">Qaseedahs</a>
             </li>
 
-            <li><i class="bx bx-moon change-theme" id="theme-button"></i></li>
+            <li>
+              <button type="button" class="change-theme" id="theme-button" aria-pressed="false" aria-label="Switch to dark theme">
+                <i class="bx bx-moon"></i>
+              </button>
+            </li>
           </ul>
         </div>
 
-        <div class="nav__toggle" id="nav-toggle">
+        <div class="nav__toggle" id="nav-toggle" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false">
           <i class="bx bx-menu"></i>
         </div>
         </ul>
@@ -61,8 +76,6 @@
     </header>
 
     <main class="l-main">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     
       <!--========== Body ==========-->
       <section class="menu section bd-container" >
         <span class="section-subtitle">NO ENTITY BUT GOD</span>
@@ -79,7 +92,7 @@
               <img
                src="assets/img/mosque icon.png"
                 alt=""
-                class="menu__img">
+                class="menu__img" loading="lazy" decoding="async">
               </a>
             <h3 class="menu__name">Rathibathul <br> Haqqiyyathil <br> Qadiriyyah v1</h3>
             <span class="menu__detail"></span>
@@ -94,7 +107,7 @@
             <img
               src="assets/img/Raathib v2.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Rathibathul <br> Haqqiyyathil <br> Qadiriyyah v2</h3>
             <span class="menu__detail"></span>
@@ -104,19 +117,15 @@
             ></a>
           </div>
 
-          <div class="menu__content">
-            <a href="404.html" target="_blank">
+          <div class="menu__content" data-unavailable="true">
             <img
               src="assets/img/mosque icon.png"
-              alt=""
-              class="menu__img">
-            </a>
+              alt="Rathibathul Haqqiyyathil Qadiriyyah v3 cover"
+              class="menu__img" loading="lazy" decoding="async">
             <h3 class="menu__name">Rathibathul <br> Haqqiyyathil <br> Qadiriyyah v3</h3>
             <span class="menu__detail"></span>
             <span class="menu__preci">Arabic</span>
-            <a href="404.html" target="_blank" class="button "
-              ><i class="fa fa-book" ></i
-            ></a>
+            <span class="menu__unavailable-badge" role="status">Not available yet</span>
           </div>
 
           <div class="menu__content">
@@ -124,7 +133,7 @@
             <img
               src="assets/img/mosque icon.png"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Rathibathul <br> Haqqiyyathil <br> Qadiriyyah</h3>
             <span class="menu__detail"></span>
@@ -140,7 +149,7 @@
             <img
               src="assets/img/madinah2.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Subhana<br> Mowlid <br> Shareef</h3>
             <span class="menu__detail"></span>
@@ -155,7 +164,7 @@
             <img
               src="assets/img/madinah.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Subhana<br> Mowlid <br> Shareef</h3>
             <span class="menu__detail"></span>
@@ -170,7 +179,7 @@
             <img
               src="assets/img/abdulqadirjilani.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">
               Muhiyadeen<br>
@@ -189,7 +198,7 @@
             <img
               src="assets/img/Yaseen Moulana Mowlid.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
           </a>
             <h3 class="menu__name">Yaseen Moulana<br> Mowlid<br> Shareef</h3>
             <span class="menu__detail"></span>
@@ -204,7 +213,7 @@
             <img
               src="assets/img/nagore-dargah.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Meeran Sahib<br> Mowlid<br> Shareef</h3>
             <span class="menu__detail"></span>
@@ -219,7 +228,7 @@
             <img
               src="assets/img/islamic-imam-ali-01.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Ali Raliyallahu<br> Mowlid<br> Shareef</h3>
             <span class="menu__detail"></span>
@@ -234,7 +243,7 @@
             <img
               src="assets/img/6961276809_7e4ddc503d_c.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Kwhaja Nayagam<br> Mowlid<br> Shareef</h3>
             <span class="menu__detail"></span>
@@ -250,7 +259,7 @@
             <img
               src="assets/img/6961276809_7e4ddc503d_c.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Kwhaja Nayagam<br> Mowlid<br> Shareef v2</h3>
             <span class="menu__detail"></span>
@@ -265,7 +274,7 @@
             <img
               src="assets/img/imam-hassan.png"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Hassanain<br> Mowlid<br> Shareef</h3>
             <span class="menu__detail"></span>
@@ -280,7 +289,7 @@
             <img
               src="assets/img/Al Burda.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Qaseedathul <br>Burdah <br> Shareef</h3>
             <span class="menu__detail"></span>
@@ -295,7 +304,7 @@
             <img
               src="assets/img/Al Burda Tamil.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Qaseedathul <br>Burdah <br> Shareef<br><br></h3>
             <span class="menu__detail"></span>
@@ -310,7 +319,7 @@
             <img
               src="assets/img/madinah3.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Barzanji <br>Mowlid <br> Shareef<br><br></h3>
             <span class="menu__detail"></span>
@@ -325,7 +334,7 @@
             <img
               src="assets/img/yegantha_muthukkal.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">ஏகாந்த<br>முத்துகள்<br></h3>
             <span class="menu__detail"></span>
@@ -340,7 +349,7 @@
             <img
               src="assets/img/rasoolmalai.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Rasool Malai <br>Meeran Malai<br>Nagaimani Maalai<br>ரசூல்மாலை<br>  </h3>
             <span class="menu__detail"></span>
@@ -355,7 +364,7 @@
             <img
               src="assets/img/rasoolmalai2.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Rasool <br>Malai v2<br>ரசூல்மாலை  </h3>
             <span class="menu__detail"></span>
@@ -370,7 +379,7 @@
             <img
               src="assets/img/Badr Mowlid.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Badr <br>Mowlid <br>Shareef  </h3>
             <span class="menu__detail"></span>
@@ -386,7 +395,7 @@
             <img
               src="assets/img/jafarsadiq.png"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Imam<br>Jafar Sadiq Rali<br>Fathihah</h3>
             <span class="menu__detail"></span>
@@ -396,19 +405,15 @@
             ></a>
           </div>
 
-          <div class="menu__content">
-            <a href="404.html" target="_blank">
+          <div class="menu__content" data-unavailable="true">
             <img
               src="assets/img/mosque icon.png"
-              alt=""
-              class="menu__img">
-            </a>
+              alt="Moonru Mowlidum Burdavum cover"
+              class="menu__img" loading="lazy" decoding="async">
             <h3 class="menu__name"> Moonru <br>Mowlidum <br> Burdavum  </h3>
             <span class="menu__detail"></span>
             <span class="menu__preci">Tamil</span>
-            <a href="404.html" target="_blank" class="button "
-              ><i class="fa fa-book"></i
-            ></a>
+            <span class="menu__unavailable-badge" role="status">Not available yet</span>
           </div>
 
            <div class="menu__content">
@@ -416,7 +421,7 @@
             <img
               src="assets/img/jamaliya moulana.jpg"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name"> Appa <br>Naayagam <br> Qaseedah <br><br> </h3>
             <span class="menu__detail"></span>
@@ -435,7 +440,7 @@
             <img
               src="assets/img/qasseathul awniyya.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Qaseedathul Ahmathiya<br> Qaseedathul<br>Awniyya</h3>
             <span class="menu__detail"></span>
@@ -450,7 +455,7 @@
             <img
               src="assets/img/Thowba.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Thowba<br> Sobanam<br>ஏகத்துவ<br> முத்துகள்</h3>
             <span class="menu__detail"></span>
@@ -465,7 +470,7 @@
             <img
               src="assets/img/Thaaki Pirabam Tamil.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Thaaki <br> Pirabam<br>தாகி<br> பிரபம்</h3>
             <span class="menu__detail"></span>
@@ -480,7 +485,7 @@
             <img
               src="assets/img/Yaseen Moulana Paa Maalai.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Quthbugal Thilagam<br> Yaseen<br>Moulana<br> (R.A) பாமாலை</h3>
             <span class="menu__detail"></span>
@@ -491,19 +496,15 @@
           </div>
           
 
-           <div class="menu__content">
-            <a href="404.html" target="_blank">
+           <div class="menu__content" data-unavailable="true">
             <img
               src="assets/img/mosque icon.png"
-              alt=""
-              class="menu__img">
-            </a>
+              alt="Water Booth cover"
+              class="menu__img" loading="lazy" decoding="async">
             <h3 class="menu__name">Water <br> Booth<br>தாகி<br> பிரபம்</h3>
             <span class="menu__detail"></span>
             <span class="menu__preci">English</span>
-            <a href="404.html" target="_blank" class="button "
-              ><i class="fa fa-book" ></i
-            ></a>
+            <span class="menu__unavailable-badge" role="status">Not available yet</span>
           </div>
 
           <div class="menu__content">
@@ -511,7 +512,7 @@
             <img
               src="assets/img/thuhbathul mursala.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Thuhbathul<br>Mursala<br>துஹ்ஃபத்துல் முர்ஸலா</h3>
             <span class="menu__detail"></span>
@@ -528,7 +529,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>June 2021 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -543,7 +544,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>July 2021 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -559,7 +560,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>August 2021 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -574,7 +575,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>September 2021 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -589,7 +590,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>October 2021 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -604,7 +605,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>January 2022 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -619,7 +620,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>February 2022 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -634,7 +635,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>July 2022 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -649,7 +650,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>August 2022 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -664,7 +665,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>September 2022 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -680,7 +681,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>October 2022 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -695,7 +696,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>November 2022 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -711,7 +712,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>January 2023 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -727,7 +728,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>February 2023 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -742,7 +743,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>March 2023 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -758,7 +759,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>August 2023 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -775,7 +776,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>September 2023 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -792,7 +793,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>October 2023 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -807,7 +808,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>November 2023 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -823,7 +824,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>January 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -839,7 +840,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>February 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -854,7 +855,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>March 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -870,7 +871,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>May 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -886,7 +887,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>June 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -902,7 +903,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>July 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -917,7 +918,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>August 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -932,7 +933,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>September 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -947,7 +948,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>October 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -962,7 +963,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>November 2024 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -978,7 +979,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>January 2025 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -994,7 +995,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>March 2025 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1009,7 +1010,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>April 2025 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1024,7 +1025,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>May 2025 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1039,7 +1040,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>August 2025 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1054,7 +1055,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>October 2025 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1069,7 +1070,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>February 2026 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1084,7 +1085,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>June 2026 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1099,7 +1100,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>July 2026 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1114,7 +1115,7 @@
             <img
               src="assets/img/MGP Logo.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">MGP <br>August 2026 <br>மறைஞானப்<br>பேழை<br> </h3>
             <span class="menu__detail"></span>
@@ -1140,7 +1141,7 @@
             <img
               src="assets/img/iraiarutpa.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">IraiArutpa<br>இறையருட்பா<br>வாரிதாத்தே இலாஹிய்யா</h3>
             <span class="menu__detail"></span>
@@ -1155,7 +1156,7 @@
             <img
               src="assets/img/Meigaana Padalkal.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Meigaana<br>Paadalkal<br>மெய்ஞ்ஞானப் பாடல்கள்</h3>
             <span class="menu__detail"></span>
@@ -1170,7 +1171,7 @@
             <img
               src="assets/img/Fathima Naayagiyaar.PNG"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Fathima <br>Naayagiyar<br>Maalai<br><br> </h3>
             <span class="menu__detail"></span>
@@ -1187,7 +1188,7 @@
             <img
               src="assets/img/click_here.png"
               alt=""
-              class="menu__img">
+              class="menu__img" loading="lazy" decoding="async">
             </a>
             <h3 class="menu__name">Click <br>More <br>Lyrics</h3>
             <span class="menu__detail"></span>
@@ -1218,6 +1219,7 @@
     <script src="https://unpkg.com/scrollreveal"></script>
 
     <!--========== MAIN JS ==========-->
+    <script src="assets/js/theme.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
 </html>

@@ -13,6 +13,10 @@
     --text-color-light: #A6A6A6;
     --body-color: #FBFEFD;
     --container-color: #FFFFFF;
+    --border-color: #E0E0E0;
+    --input-bg: #FFFFFF;
+    --danger-color: #C0392B;
+    color-scheme: light;
 
     /*========== Font and typography ==========*/
     --body-font: 'Poppins', sans-serif;
@@ -61,12 +65,37 @@ html{
 }
 
 /*========== Variables Dark theme ==========*/
-body.dark-theme{
+// System preference is the default unless the user picked explicitly.
+@media screen and (prefers-color-scheme: dark){
+    :root:not(.light-theme){
+        --title-color: #F1F3F2;
+        --text-color: #C7D1CC;
+        --text-color-light: #8A9690;
+        --body-color: #1D2521;
+        --container-color: #27302C;
+        --border-color: #3A453F;
+        --input-bg: #27302C;
+        color-scheme: dark;
+    }
+}
+:root.dark-theme{
     --title-color: #F1F3F2;
     --text-color: #C7D1CC;
+    --text-color-light: #8A9690;
     --body-color: #1D2521;
     --container-color: #27302C;
+    --border-color: #3A453F;
+    --input-bg: #27302C;
+    color-scheme: dark;
 }
+
+// NOTE: assets/css/styles.css also contains a hand-appended
+// "ACCESSIBILITY / THEME HARDENING" section (skip-link, focus-visible,
+// reduced-motion, unavailable-book badge, search input theming, responsive
+// nav/touch-target tweaks) that has not been back-ported into this .scss
+// source. There is no Sass build step in this repo (styles.css is the
+// checked-in compiled output edited directly) - keep that in mind if this
+// file is ever recompiled, it would clobber those rules.
 
 /*========== Button Dark/Light ==========*/
 .change-theme {
