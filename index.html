@@ -87,7 +87,23 @@
         
         <h2 class="section-title" id="kithab">EMS BOOKS, KITHAB, QASEEDAHS</h2>
         <span class="section-subtitle">BE IN ALL AND GET THE POWER OF GOD</span>
-        
+
+        <div class="filters" role="group" aria-label="Filter the catalogue">
+          <div class="filters__group" role="group" aria-label="Filter by language">
+            <span class="filters__label">Language</span>
+            <button type="button" class="filter-chip" data-filter-lang="arabic" aria-pressed="false">Arabic</button>
+            <button type="button" class="filter-chip" data-filter-lang="tamil" aria-pressed="false">Tamil</button>
+            <button type="button" class="filter-chip" data-filter-lang="english" aria-pressed="false">English</button>
+          </div>
+          <div class="filters__group" role="group" aria-label="Filter by category">
+            <span class="filters__label">Category</span>
+            <button type="button" class="filter-chip" data-filter-category="kithab-books" aria-pressed="false">Kithab &amp; Books</button>
+            <button type="button" class="filter-chip" data-filter-category="mgp" aria-pressed="false">MGP</button>
+            <button type="button" class="filter-chip" data-filter-category="qaseedahs" aria-pressed="false">Qaseedahs</button>
+          </div>
+          <button type="button" class="filter-reset" id="filter-reset">Reset filters</button>
+        </div>
+        <p class="no-results" id="no-results" role="status" hidden>No books match your search and filters.</p>
 
         <div class="menu__container bd-grid" id="myUL">
       
@@ -1254,24 +1270,59 @@
 
 
 <script>
+// Active filter state: which language/category chips are toggled on.
+// Empty set within a group = "no filter in that group" (show everything).
+var activeLangFilters = new Set();
+var activeCategoryFilters = new Set();
+
+function cardCategory(card) {
+    if (card.closest("#mgp")) return "mgp";
+    if (card.closest("#qaseedahs-grid")) return "qaseedahs";
+    return "kithab-books";
+}
+
+function cardLanguages(card) {
+    var preci = card.querySelector(".menu__preci");
+    var text = preci ? preci.textContent.toLowerCase() : "";
+    var langs = [];
+    if (text.indexOf("arabic") > -1) langs.push("arabic");
+    if (text.indexOf("tamil") > -1) langs.push("tamil");
+    if (text.indexOf("english") > -1) langs.push("english");
+    return langs;
+}
+
 function myFunction() {
-    // The catalogue now spans three sections (Kithab/Books, MGP-by-year,
+    // The catalogue spans three sections (Kithab/Books, MGP-by-year,
     // Qaseedahs) instead of one #myUL grid, so this scans the whole <main>.
     var input = document.getElementById("myInput");
     var filter = input.value.toUpperCase();
     var hasQuery = filter.length > 0;
+    var hasFilters = activeLangFilters.size > 0 || activeCategoryFilters.size > 0;
     var cards = document.querySelectorAll("main .menu__content");
+    var visibleCount = 0;
 
     cards.forEach(function (card) {
         var h3 = card.getElementsByTagName("h3")[0];
         var txtValue = h3 ? (h3.textContent || h3.innerText) : "";
-        card.style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+        var matchesQuery = txtValue.toUpperCase().indexOf(filter) > -1;
+
+        var matchesLang =
+            activeLangFilters.size === 0 ||
+            cardLanguages(card).some(function (l) { return activeLangFilters.has(l); });
+
+        var matchesCategory =
+            activeCategoryFilters.size === 0 || activeCategoryFilters.has(cardCategory(card));
+
+        var visible = matchesQuery && matchesLang && matchesCategory;
+        card.style.display = visible ? "" : "none";
+        if (visible) visibleCount++;
     });
 
-    // Auto-expand MGP year groups that contain a match; otherwise restore
-    // the default (only the most recent year open) once the search clears.
+    // Auto-expand MGP year groups that contain a visible match; otherwise
+    // restore the default (only the most recent year open) once the
+    // search/filters are cleared.
     document.querySelectorAll(".mgp-year").forEach(function (details) {
-        if (!hasQuery) {
+        if (!hasQuery && !hasFilters) {
             details.open = details.hasAttribute("data-default-open");
             return;
         }
@@ -1280,6 +1331,40 @@ function myFunction() {
             return c.style.display !== "none";
         });
         details.open = hasVisibleMatch;
+    });
+
+    var noResults = document.getElementById("no-results");
+    if (noResults) noResults.hidden = visibleCount > 0;
+}
+
+document.querySelectorAll(".filter-chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+        var isLang = chip.hasAttribute("data-filter-lang");
+        var key = isLang ? chip.getAttribute("data-filter-lang") : chip.getAttribute("data-filter-category");
+        var set = isLang ? activeLangFilters : activeCategoryFilters;
+        var pressed = chip.getAttribute("aria-pressed") === "true";
+
+        if (pressed) {
+            set.delete(key);
+        } else {
+            set.add(key);
+        }
+        chip.setAttribute("aria-pressed", String(!pressed));
+        myFunction();
+    });
+});
+
+var filterReset = document.getElementById("filter-reset");
+if (filterReset) {
+    filterReset.addEventListener("click", function () {
+        activeLangFilters.clear();
+        activeCategoryFilters.clear();
+        document.querySelectorAll(".filter-chip").forEach(function (chip) {
+            chip.setAttribute("aria-pressed", "false");
+        });
+        var input = document.getElementById("myInput");
+        if (input) input.value = "";
+        myFunction();
     });
 }
 </script>

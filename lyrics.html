@@ -16,719 +16,6 @@
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>EMS Lyrics World</title>
-  <style>
-    /*===== GOOGLE FONTS =====*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
-/*===== VARIABLES CSS =====*/
-:root {
-  --header-height: 3rem;
-
-  /*========== Colors ==========*/
-  --first-color: #069c54;
-  --first-color-alt: #048654;
-  --title-color: #393939;
-  --text-color: #707070;
-  --text-color-light: #a6a6a6;
-  --body-color: #fbfefd;
-  --container-color: #ffffff;
-
-  /*========== Font and typography ==========*/
-  --body-font: "Poppins", sans-serif;
-  --biggest-font-size: 2.25rem;
-  --h1-font-size: 1.5rem;
-  --h2-font-size: 1.25rem;
-  --h3-font-size: 1rem;
-  --normal-font-size: 0.938rem;
-  --small-font-size: 0.813rem;
-  --smaller-font-size: 0.75rem;
-
-  /*========== Font weight ==========*/
-  --font-medium: 500;
-  --font-semi-bold: 600;
-
-  /*========== Margenes ==========*/
-  --mb-1: 0.5rem;
-  --mb-2: 1rem;
-  --mb-3: 1.5rem;
-  --mb-4: 2rem;
-  --mb-5: 2.5rem;
-  --mb-6: 3rem;
-
-  /*========== z index ==========*/
-  --z-tooltip: 10;
-  --z-fixed: 100;
-}
-
-@media screen and (min-width: 768px) {
-  :root {
-    --biggest-font-size: 4rem;
-    --h1-font-size: 2.25rem;
-    --h2-font-size: 1.5rem;
-    --h3-font-size: 1.25rem;
-    --normal-font-size: 1rem;
-    --small-font-size: 0.875rem;
-    --smaller-font-size: 0.813rem;
-  }
-}
-
-/*========== BASE ==========*/
-*,
-::before,
-::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/*========== Variables Dark theme ==========*/
-body.dark-theme {
-  --title-color: #f1f3f2;
-  --text-color: #c7d1cc;
-  --body-color: #1d2521;
-  --container-color: #27302c;
-}
-
-/*========== Button Dark/Light ==========*/
-.change-theme {
-  position: absolute;
-  right: 1rem;
-  top: 1.8rem;
-  color: var(--text-color);
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-body {
-  margin: var(--header-height) 0 0 0;
-  font-family: var(--body-font);
-  font-size: var(--normal-font-size);
-  background-color: var(--body-color);
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-h1,
-h2,
-h3,
-p,
-ul {
-  margin: 0;
-}
-
-ul {
-  padding: 0;
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/*========== CLASS CSS ==========*/
-.section {
-  padding: 4rem 0 2rem;
-}
-
-.section-title,
-.section-subtitle {
-  text-align: center;
-}
-
-.section-title {
-  font-size: var(--h1-font-size);
-  color: var(--title-color);
-  margin-bottom: var(--mb-3);
-}
-
-.section-subtitle {
-  display: block;
-  color: var(--first-color);
-  font-weight: var(--font-medium);
-  margin-bottom: var(--mb-1);
-}
-
-/*========== LAYOUT ==========*/
-.bd-container {
-  max-width: 960px;
-  width: calc(100% - 2rem);
-  margin-left: var(--mb-2);
-  margin-right: var(--mb-2);
-}
-
-.bd-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.l-header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: var(--z-fixed);
-  background-color: var(--body-color);
-}
-
-/*========== NAV ==========*/
-.nav {
-  max-width: 1024px;
-  height: var(--header-height);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-@media screen and (max-width: 768px) {
-  .nav__menu {
-    position: fixed;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    padding: 1.5rem 0 1rem;
-    text-align: center;
-    background-color: var(--body-color);
-    transition: 0.4s;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 1rem 1rem;
-    z-index: var(--z-fixed);
-  }
-}
-
-.nav__item {
-  margin-bottom: var(--mb-2);
-}
-
-.nav__link,
-.nav__logo,
-.nav__toggle {
-  color: var(--text-color);
-  font-weight: var(--font-medium);
-}
-
-.nav__logo:hover {
-  color: var(--first-color);
-}
-
-.nav__link {
-  transition: 0.3s;
-}
-
-.nav__link:hover {
-  color: var(--first-color);
-}
-
-.nav__toggle {
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-
-/* Show menu */
-.show-menu {
-  top: var(--header-height);
-}
-
-/* Active menu */
-.active-link {
-  color: var(--first-color);
-}
-
-/* Change background header */
-.scroll-header {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Scroll top */
-.scrolltop {
-  position: fixed;
-  right: 1rem;
-  bottom: -20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.3rem;
-  background: rgba(6, 156, 84, 0.5);
-  border-radius: 0.4rem;
-  z-index: var(--z-tooltip);
-  transition: 0.4s;
-  visibility: hidden;
-}
-
-.scrolltop:hover {
-  background-color: var(--first-color-alt);
-}
-
-.scrolltop__icon {
-  font-size: 1.8rem;
-  color: var(--body-color);
-}
-
-/* Show scrolltop */
-.show-scroll {
-  visibility: visible;
-  bottom: 1.5rem;
-}
-
-/*========== HOME ==========*/
-.home__container {
-  height: calc(100vh - var(--header-height));
-  align-content: center;
-}
-
-.home__title {
-  font-size: var(--biggest-font-size);
-  color: var(--first-color);
-  margin-bottom: var(--mb-1);
-}
-
-.home__subtitle {
-  font-size: var(--h1-font-size);
-  color: var(--title-color);
-  margin-bottom: var(--mb-4);
-}
-
-.home__img {
-  width: 300px;
-  justify-self: center;
-}
-
-/*========== BUTTONS ==========*/
-.button {
-  display: inline-block;
-  background-color: var(--first-color);
-  color: #fff;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  transition: 0.3s;
-}
-
-.button:hover {
-  background-color: var(--first-color-alt);
-}
-
-/*========== ABOUT ==========*/
-.about__data {
-  text-align: center;
-}
-
-.about__description {
-  margin-bottom: var(--mb-3);
-}
-
-.about__img {
-  width: 280px;
-  border-radius: 0.5rem;
-  justify-self: center;
-}
-
-/*========== SERVICES ==========*/
-.services__container {
-  row-gap: 2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.services__content {
-  text-align: center;
-}
-
-.services__img {
-  width: 64px;
-  height: 64px;
-  fill: var(--first-color);
-  margin-bottom: var(--mb-2);
-}
-
-.services__title {
-  font-size: var(--h3-font-size);
-  color: var(--title-color);
-  margin-bottom: var(--mb-1);
-}
-
-.services__description {
-  padding: 0 1.5rem;
-}
-
-/*========== MENU ==========*/
-.menu__container {
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: center;
-}
-
-.menu__content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--container-color);
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(3, 74, 40, 0.15);
-  padding: 0.75rem;
-}
-
-.menu__img {
-  width: 100px;
-  align-self: center;
-  margin-bottom: var(--mb-2);
-}
-
-.menu__name,
-.menu__preci {
-  font-weight: var(--font-semi-bold);
-  color: var(--title-color);
-}
-
-.menu__name {
-  font-size: var(--normal-font-size);
-}
-
-.menu__detail,
-.menu__preci {
-  font-size: var(--small-font-size);
-}
-
-.menu__detail {
-  margin-bottom: var(--mb-1);
-}
-
-.menu__button {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  padding: 0.625rem 0.813rem;
-  border-radius: 0.5rem 0 0.5rem 0;
-}
-
-/*========== APP ==========*/
-.app__data {
-  text-align: center;
-}
-
-.app__description {
-  margin-bottom: var(--mb-5);
-}
-
-.app__stores {
-  margin-bottom: var(--mb-4);
-}
-
-.app__store {
-  width: 120px;
-  margin: 0 var(--mb-1);
-}
-
-.app__img {
-  width: 230px;
-  justify-self: center;
-}
-
-/*========== CONTACT ==========*/
-.contact__container {
-  text-align: center;
-}
-
-.contact__description {
-  margin-bottom: var(--mb-3);
-}
-
-/*========== FOOTER ==========*/
-.footer__container {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  row-gap: 2rem;
-}
-
-.footer__logo {
-  font-size: var(--h3-font-size);
-  color: var(--first-color);
-  font-weight: var(--font-semi-bold);
-}
-
-.footer__description {
-  display: block;
-  font-size: var(--small-font-size);
-  margin: 0.25rem 0 var(--mb-3);
-}
-
-.footer__social {
-  font-size: 1.5rem;
-  color: var(--title-color);
-  margin-right: var(--mb-2);
-}
-
-.footer__title {
-  font-size: var(--h2-font-size);
-  color: var(--title-color);
-  margin-bottom: var(--mb-2);
-}
-
-.footer__link {
-  display: inline-block;
-  color: var(--text-color);
-  margin-bottom: var(--mb-1);
-}
-
-.footer__link:hover {
-  color: var(--first-color);
-}
-
-.footer__copy {
-  text-align: center;
-  font-size: var(--small-font-size);
-  color: var(--text-color-light);
-  margin-top: 3.5rem;
-}
-
-/*========== MEDIA QUERIES ==========*/
-@media screen and (min-width: 576px) {
-  .home__container,
-  .about__container,
-  .app__container {
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-  }
-
-  .about__data,
-  .about__initial,
-  .app__data,
-  .app__initial,
-  .contact__container,
-  .contact__initial {
-    text-align: initial;
-  }
-
-  .about__img,
-  .app__img {
-    width: 380px;
-    order: -1;
-  }
-
-  .contact__container {
-    grid-template-columns: 1.75fr 1fr;
-    align-items: center;
-  }
-  .contact__button {
-    justify-self: center;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  body {
-    margin: 0;
-  }
-
-  .section {
-    padding-top: 8rem;
-  }
-
-  .nav {
-    height: calc(var(--header-height) + 1.5rem);
-  }
-  .nav__list {
-    display: flex;
-  }
-  .nav__item {
-    margin-left: var(--mb-5);
-    margin-bottom: 0;
-  }
-  .nav__toggle {
-    display: none;
-  }
-
-  .change-theme {
-    position: initial;
-    margin-left: var(--mb-2);
-  }
-
-  .home__container {
-    height: 100vh;
-    justify-items: center;
-  }
-
-  .services__container,
-  .menu__container {
-    margin-top: var(--mb-6);
-  }
-
-  .menu__container {
-    grid-template-columns: repeat(3, 210px);
-    column-gap: 4rem;
-  }
-  .menu__content {
-    padding: 1.5rem;
-  }
-  .menu__img {
-    width: 130px;
-  }
-
-  .app__store {
-    margin: 0 var(--mb-1) 0 0;
-  }
-}
-
-@media screen and (min-width: 960px) {
-  .bd-container {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .home__img {
-    width: 500px;
-  }
-
-  .about__container,
-  .app__container {
-    column-gap: 7rem;
-  }
-}
-
-/* For tall screens on mobiles y desktop*/
-@media screen and (min-height: 721px) {
-  .home__container {
-    height: 640px;
-  }
-}
-
-.responsive-table-container {
-      overflow-x: auto;
-    }
-
-  .responsive-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: var(--mb-4);
-  }
-  .responsive-table th { cursor: pointer; }
-
-  .responsive-table th,
-  .responsive-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--text-color-light);
-  }
-
-  .responsive-table th {
-    background-color: var(--first-color);
-    color: var(--container-color);
-    position: relative;
-    padding-right: 3rem;
-  }
-
-  .responsive-table th .toggle-btn {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--container-color);
-    font-size: 1rem;
-    cursor: pointer;
-  }
-
-  .responsive-table th.collapsed .toggle-btn::after {
-    content: '\25B6'; /* Right arrow */
-  }
-
-  .responsive-table th .toggle-btn::after {
-    content: '\25BC'; /* Down arrow */
-  }
-
-  .responsive-table td.collapsed,
-  .responsive-table th.collapsed {
-    display: none;
-  }
-
-  /* Media queries for automatic hiding */
-  @media screen and (max-width: 768px) {
-    .responsive-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-      }
-  }
-
-  @media screen and (max-width: 576px) {
-    .responsive-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-      }
-  }
-
-  @media screen and (max-width: 600px) {
-      .responsive-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-      }
-    }
-
-  .reset-btn {
-    display: inline-block;
-    background-color: var(--first-color);
-    color: #fff;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    transition: 0.3s;
-    cursor: pointer;
-    margin-bottom: 1rem;
-  }
-
-  .reset-btn:hover {
-    background-color: var(--first-color-alt);
-  }
-
-  .view-icon {
-    cursor: pointer;
-    color: var(--first-color);
-    text-align: center;
-  }
-
-  .search-container {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-container {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-
-  .search-container input[type="text"] {
-    padding: 0.75rem 2rem 0.75rem 2.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
-
-  .search-container input[type="text"]:focus {
-    border-color: #007bff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    outline: none;
-  }
-
-  .search-container .search-icon {
-    position: absolute;
-    left: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #007bff;
-  }
-
-  </style>
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -753,447 +40,473 @@ img {
   <main>
     <section class="section bd-container" id="responsive-table">
       <h2 class="section-title">வரிகள் பேழை</h2>
-      <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search...">
-        <button class="reset-btn" onclick="resetTable()">Reset Columns</button>
+
+      <div class="table-controls">
+        <div class="search-container">
+          <i class="bx bx-search search-icon" aria-hidden="true"></i>
+          <label for="search-input" class="visually-hidden">Search lyrics</label>
+          <input type="text" id="search-input" placeholder="Search...">
+          <button type="button" class="filter-reset" id="table-reset">Reset filters &amp; columns</button>
+        </div>
+        <div class="filters" role="group" aria-label="Show or hide columns">
+          <span class="filters__label">Columns</span>
+          <button type="button" class="filter-chip" data-column-toggle="0" aria-pressed="true">Song (English)</button>
+          <button type="button" class="filter-chip" data-column-toggle="1" aria-pressed="true">Song (Tamil)</button>
+          <button type="button" class="filter-chip" data-column-toggle="2" aria-pressed="true">Lyricist</button>
+          <button type="button" class="filter-chip" data-column-toggle="3" aria-pressed="true">In Praise/Remembrance Of</button>
+        </div>
+        <div class="filters" role="group" aria-label="Quick filter by who the song is about">
+          <span class="filters__label">About</span>
+          <button type="button" class="filter-chip" data-topic="muhammad" aria-pressed="false">Prophet Muhammad</button>
+          <button type="button" class="filter-chip" data-topic="allah" aria-pressed="false">Allah</button>
+          <button type="button" class="filter-chip" data-topic="karbala" aria-pressed="false">Karbala</button>
+          <button type="button" class="filter-chip" data-topic="eid" aria-pressed="false">Eid</button>
+          <button type="button" class="filter-chip" data-topic="yaseen-moulana" aria-pressed="false">Yaseen Moulana</button>
+          <button type="button" class="filter-chip" data-topic="yaseen-ali-moulana" aria-pressed="false">Yaseen Ali Moulana</button>
+          <button type="button" class="filter-chip" data-topic="khaleel-awn-mowlana" aria-pressed="false">Khaleel Awn Mowlana</button>
+          <button type="button" class="filter-chip" data-topic="mohamed-moulana" aria-pressed="false">Mohamed Moulana</button>
+          <button type="button" class="filter-chip" data-topic="abdul-qadir-jilani" aria-pressed="false">Sheikh Abdul Qadir Jilani</button>
+        </div>
       </div>
+      <p class="no-results" id="table-no-results" role="status" hidden>No songs match your search and filters.</p>
+
       <div class="responsive-table-container">
       <table class="responsive-table">
         <thead>
           <tr>
-            <th>
-              <button class="toggle-btn" onclick="toggleColumn(0)"></button>
-              Song Name (English)
-              <i class="sort-icon" onclick="sortTable(0)">↕</i>
+            <th scope="col">
+              <button type="button" class="th-sort-btn" onclick="sortTable(0)">
+                <span>Song Name (English)</span>
+                <i class="bx bx-sort-alt-2 sort-icon" aria-hidden="true"></i>
+              </button>
             </th>
-            <th>
-              <button class="toggle-btn" onclick="toggleColumn(1)"></button>
-              Song Name (Tamil)
-              <i class="sort-icon" onclick="sortTable(1)">↕</i>
+            <th scope="col">
+              <button type="button" class="th-sort-btn" onclick="sortTable(1)">
+                <span>Song Name (Tamil)</span>
+                <i class="bx bx-sort-alt-2 sort-icon" aria-hidden="true"></i>
+              </button>
             </th>
-            <th>
-              <button class="toggle-btn" onclick="toggleColumn(2)"></button>
-              Lyricist
-              <i class="sort-icon" onclick="sortTable(2)">↕</i>
+            <th scope="col">
+              <button type="button" class="th-sort-btn" onclick="sortTable(2)">
+                <span>Lyricist</span>
+                <i class="bx bx-sort-alt-2 sort-icon" aria-hidden="true"></i>
+              </button>
             </th>
-            <th>
-              <button class="toggle-btn" onclick="toggleColumn(3)"></button>
-              In Praise/Remembrance Of
-              <i class="sort-icon" onclick="sortTable(3)">↕</i>
+            <th scope="col">
+              <button type="button" class="th-sort-btn" onclick="sortTable(3)">
+                <span>In Praise/Remembrance Of</span>
+                <i class="bx bx-sort-alt-2 sort-icon" aria-hidden="true"></i>
+              </button>
             </th>
-            <th>
-              <button class="toggle-btn" onclick="toggleColumn(4)"></button>
-              View
-              <i class="sort-icon" onclick="sortTable(4)">↕</i>
-            </th>
+            <th scope="col" class="view-col">View</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="column-0">Yaseen Kodai Vallale</td>
-            <td class="column-1">யாஸீன் கொடைவள்ளலே!</td>
-            <td class="column-2">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
-            <td class="column-3">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/yaseen_kodaivallale.html')"></i></td>
+            <td class="column-0" data-label="Song (English)">Yaseen Kodai Vallale</td>
+            <td class="column-1" data-label="Song (Tamil)">யாஸீன் கொடைவள்ளலே!</td>
+            <td class="column-2" data-label="Lyricist">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+            <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+            <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/yaseen_kodaivallale.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
-            <td class="column-0">Ya Shaiki Yaseen Ali</td>
-            <td class="column-1">யா ஷைகி யாஸீன் அலி</td>
-            <td class="column-2">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
-            <td class="column-3">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ya_shaikhi_yaseen_ali.html')"></i></td>
+            <td class="column-0" data-label="Song (English)">Ya Shaiki Yaseen Ali</td>
+            <td class="column-1" data-label="Song (Tamil)">யா ஷைகி யாஸீன் அலி</td>
+            <td class="column-2" data-label="Lyricist">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+            <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+            <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ya_shaikhi_yaseen_ali.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
-            <td class="column-0">Agavai Naanginile</td>
-            <td class="column-1">அகவை நான்கினிலே</td>
-            <td class="column-2">செய்யிது முஃபீல் மௌலானா திருமுல்லைவாசல்</td>
-            <td class="column-3">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/agavai_naanginile.html')"></i></td>
+            <td class="column-0" data-label="Song (English)">Agavai Naanginile</td>
+            <td class="column-1" data-label="Song (Tamil)">அகவை நான்கினிலே</td>
+            <td class="column-2" data-label="Lyricist">செய்யிது முஃபீல் மௌலானா திருமுல்லைவாசல்</td>
+            <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+            <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/agavai_naanginile.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
-            <td class="column-0">Irappe Kodum Irappe</td>
-            <td class="column-1">இறப்பே கொடும் இறப்பே</td>
-            <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-            <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/irappe_kodum_irappe.html')"></i></td>
+            <td class="column-0" data-label="Song (English)">Irappe Kodum Irappe</td>
+            <td class="column-1" data-label="Song (Tamil)">இறப்பே கொடும் இறப்பே</td>
+            <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+            <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+            <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/irappe_kodum_irappe.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
-            <td class="column-0">Ya Nabiyallah</td>
-            <td class="column-1">யா நபியல்லாஹ்!</td>
-            <td class="column-2">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-            <td class="column-3">Prophet Muhammad (ﷺ)</td>
-            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ya_nabiyallah_ya_rasoolallah.html')"></i></td>
+            <td class="column-0" data-label="Song (English)">Ya Nabiyallah</td>
+            <td class="column-1" data-label="Song (Tamil)">யா நபியல்லாஹ்!</td>
+            <td class="column-2" data-label="Lyricist">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+            <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+            <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ya_nabiyallah_ya_rasoolallah.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
-            <td class="column-0">Ya Nabiyallah (Arabic Lyrics)</td>
-            <td class="column-1">யா நபியல்லாஹ்!</td>
-            <td class="column-2">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-            <td class="column-3">Prophet Muhammad (ﷺ)</td>
-            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ya_nabiyallah_ya_rasoolallah_arabic.html')"></i></td>
+            <td class="column-0" data-label="Song (English)">Ya Nabiyallah (Arabic Lyrics)</td>
+            <td class="column-1" data-label="Song (Tamil)">யா நபியல்லாஹ்!</td>
+            <td class="column-2" data-label="Lyricist">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+            <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+            <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ya_nabiyallah_ya_rasoolallah_arabic.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
-          <td class="column-0">Maanidar Thedum</td>
-            <td class="column-1">மானிடர் தேடும்</td>
-            <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-            <td class="column-3">Prophet Muhammad (ﷺ)</td>
-            <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/maanidar_thedum.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Maanidar Thedum</td>
+            <td class="column-1" data-label="Song (Tamil)">மானிடர் தேடும்</td>
+            <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+            <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+            <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/maanidar_thedum.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
-          <td class="column-0">Thoha Rasooley</td>
-          <td class="column-1">தொஹா ரஸூலே</td>
-          <td class="column-2">Hafiz B.S. Ahmad Salih Faheemi</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/thoha_rasooley.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Thoha Rasooley</td>
+          <td class="column-1" data-label="Song (Tamil)">தொஹா ரஸூலே</td>
+          <td class="column-2" data-label="Lyricist">Hafiz B.S. Ahmad Salih Faheemi</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/thoha_rasooley.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Meignana Peroli</td>
-          <td class="column-1">மெய்ஞ்ஞானப் பேரோளி</td>
-          <td class="column-2">H.Raajiyammal Melathiruppoonthuruthi</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/guruve_yaseen_ali_nathare.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Meignana Peroli</td>
+          <td class="column-1" data-label="Song (Tamil)">மெய்ஞ்ஞானப் பேரோளி</td>
+          <td class="column-2" data-label="Lyricist">H.Raajiyammal Melathiruppoonthuruthi</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/guruve_yaseen_ali_nathare.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Kavithai Kadale</td>
-          <td class="column-1">கவிதைக் கடலே!</td>
-          <td class="column-2">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/kavithai_kadale.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Kavithai Kadale</td>
+          <td class="column-1" data-label="Song (Tamil)">கவிதைக் கடலே!</td>
+          <td class="column-2" data-label="Lyricist">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/kavithai_kadale.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Nabiye Em Oliye</td>
-          <td class="column-1">நபியே எம் ஒளியே</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/nabiye_em_oliye.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Nabiye Em Oliye</td>
+          <td class="column-1" data-label="Song (Tamil)">நபியே எம் ஒளியே</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/nabiye_em_oliye.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Ninaivu Yaavum Ungal Meethu</td>
-          <td class="column-1">நினைவு யாவும் உங்கள் மீது யா ரஸூலல்லாஹ்ﷺ</td>
-          <td class="column-2">கலைமாமணி கவிஞர் நாகூர் ஸலீம்</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ninaivu_yaavum_ungal_meethu.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Ninaivu Yaavum Ungal Meethu</td>
+          <td class="column-1" data-label="Song (Tamil)">நினைவு யாவும் உங்கள் மீது யா ரஸூலல்லாஹ்ﷺ</td>
+          <td class="column-2" data-label="Lyricist">கலைமாமணி கவிஞர் நாகூர் ஸலீம்</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ninaivu_yaavum_ungal_meethu.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Allahu Rabbe Allahu</td>
-          <td class="column-1">அல்லாஹு  ரப்பே அல்லாஹு</td>
-          <td class="column-2">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Allah (S.W.T)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/allahoo_rabbe_allahoo.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Allahu Rabbe Allahu</td>
+          <td class="column-1" data-label="Song (Tamil)">அல்லாஹு  ரப்பே அல்லாஹு</td>
+          <td class="column-2" data-label="Lyricist">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Allah (S.W.T)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/allahoo_rabbe_allahoo.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Annal Ungal Anbai Naadi</td>
-          <td class="column-1">அண்ணல் உங்கள் அன்பை நாடி</td>
-          <td class="column-2">Al-Hafiz Mohammed Abubacker Siddiq Bilali, Mohammed Ashiq Bilali</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/annal_ungal_anbai_naadi.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Annal Ungal Anbai Naadi</td>
+          <td class="column-1" data-label="Song (Tamil)">அண்ணல் உங்கள் அன்பை நாடி</td>
+          <td class="column-2" data-label="Lyricist">Al-Hafiz Mohammed Abubacker Siddiq Bilali, Mohammed Ashiq Bilali</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/annal_ungal_anbai_naadi.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Marainthum Maraiyaamal</td>
-          <td class="column-1">மறைந்தும் மறையாமல்</td>
-          <td class="column-2">Muhibbul Ulama Alhaj A. Muhammad Ma'hroof</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/marainthum_maraiyaamal.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Marainthum Maraiyaamal</td>
+          <td class="column-1" data-label="Song (Tamil)">மறைந்தும் மறையாமல்</td>
+          <td class="column-2" data-label="Lyricist">Muhibbul Ulama Alhaj A. Muhammad Ma'hroof</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/marainthum_maraiyaamal.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Salli Ala Nabiyina</td>
-          <td class="column-1">சல்லி அலா நபியினா</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/salli_ala_nabiyina.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Salli Ala Nabiyina</td>
+          <td class="column-1" data-label="Song (Tamil)">சல்லி அலா நபியினா</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/salli_ala_nabiyina.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Iraiye Iraiye</td>
-          <td class="column-1">இறையே இறையே</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Allah (S.W.T)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/iraiye_iraiye.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Iraiye Iraiye</td>
+          <td class="column-1" data-label="Song (Tamil)">இறையே இறையே</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Allah (S.W.T)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/iraiye_iraiye.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Madeena Thendral</td>
-          <td class="column-1">மதீனா தென்றல்</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/madeena_thendral.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Madeena Thendral</td>
+          <td class="column-1" data-label="Song (Tamil)">மதீனா தென்றல்</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/madeena_thendral.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Yaa Nabi - Yuvan - U1 Records</td>
-          <td class="column-1">யா நபி</td>
-          <td class="column-2">Rizwan</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/yaa_nabi_u1.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Yaa Nabi - Yuvan - U1 Records</td>
+          <td class="column-1" data-label="Song (Tamil)">யா நபி</td>
+          <td class="column-2" data-label="Lyricist">Rizwan</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/yaa_nabi_u1.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Annale Ya Rasoole</td>
-          <td class="column-1">அண்ணலே யா ரசூலே</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/annale_ya_rasoole.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Annale Ya Rasoole</td>
+          <td class="column-1" data-label="Song (Tamil)">அண்ணலே யா ரசூலே</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/annale_ya_rasoole.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Thozhuvoma</td>
-          <td class="column-1">தொழுவோமா</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Allah (S.W.T)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/thozhuvoma.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Thozhuvoma</td>
+          <td class="column-1" data-label="Song (Tamil)">தொழுவோமா</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Allah (S.W.T)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/thozhuvoma.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Thiyaga Thiruvilake</td>
-          <td class="column-1">தியாக திரு விளக்கே</td>
-          <td class="column-2">SSA Wahid Ramanathapuram</td>
-          <td class="column-3">Karbala</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/thiyaga_thiruvilake.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Thiyaga Thiruvilake</td>
+          <td class="column-1" data-label="Song (Tamil)">தியாக திரு விளக்கே</td>
+          <td class="column-2" data-label="Lyricist">SSA Wahid Ramanathapuram</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Karbala</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/thiyaga_thiruvilake.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Ya Ali Salam Alaikum</td>
-          <td class="column-1">யா அலி சலாம் அலைக்கும்</td>
-          <td class="column-2">கவிஞர் நாகூர் மு.காதிர் ஒலி</td>
-          <td class="column-3">Karbala</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ya_ali_salam_alaikum.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Ya Ali Salam Alaikum</td>
+          <td class="column-1" data-label="Song (Tamil)">யா அலி சலாம் அலைக்கும்</td>
+          <td class="column-2" data-label="Lyricist">கவிஞர் நாகூர் மு.காதிர் ஒலி</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Karbala</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ya_ali_salam_alaikum.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Hajju Perunaal</td>
-          <td class="column-1">ஹஜ்ஜுப் பெருநாள்</td>
-          <td class="column-2">E.M. Haniffa</td>
-          <td class="column-3">Eid-ul-Adha</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/hajj_perunaal.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Hajju Perunaal</td>
+          <td class="column-1" data-label="Song (Tamil)">ஹஜ்ஜுப் பெருநாள்</td>
+          <td class="column-2" data-label="Lyricist">E.M. Haniffa</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Eid-ul-Adha</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/hajj_perunaal.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Ungal Arutpaatham (Yaseen Moulana (R.A))</td>
-          <td class="column-1">உங்கள் அருட்பாதம்(யாஸீன் மௌலானா(ர.அ))</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ungal_arutpatham_yaseen_vappa.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Ungal Arutpaatham (Yaseen Moulana (R.A))</td>
+          <td class="column-1" data-label="Song (Tamil)">உங்கள் அருட்பாதம்(யாஸீன் மௌலானா(ர.அ))</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ungal_arutpatham_yaseen_vappa.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Annai Sa'eedha (R.A) Irangarpa</td>
-          <td class="column-1">அன்னை ஸயீதா(ர.அ) இரங்கற்பா</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Annai Sa'eedha (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/annai_sayeedha_ra_irangarpa.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Annai Sa'eedha (R.A) Irangarpa</td>
+          <td class="column-1" data-label="Song (Tamil)">அன்னை ஸயீதா(ர.அ) இரங்கற்பா</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Annai Sa'eedha (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/annai_sayeedha_ra_irangarpa.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Aruluku Peyar Thaan Yaseen</td>
-          <td class="column-1">அருளுக்குப் பெயர்தான் யாஸீன்</td>
-          <td class="column-2">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/arulukku_peyar_thaan_yaseen.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Aruluku Peyar Thaan Yaseen</td>
+          <td class="column-1" data-label="Song (Tamil)">அருளுக்குப் பெயர்தான் யாஸீன்</td>
+          <td class="column-2" data-label="Lyricist">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/arulukku_peyar_thaan_yaseen.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Noorun Nabi</td>
-          <td class="column-1">நூருன் நபி</td>
-          <td class="column-2">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/noorun_nabi_noor_ilangi.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Noorun Nabi</td>
+          <td class="column-1" data-label="Song (Tamil)">நூருன் நபி</td>
+          <td class="column-2" data-label="Lyricist">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/noorun_nabi_noor_ilangi.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Khaleel Naathar Thangal</td>
-          <td class="column-1">கலீல் நாதர் தங்கள்</td>
-          <td class="column-2">M Abdul Subahan Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/khaleel_naathar_thangal.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Khaleel Naathar Thangal</td>
+          <td class="column-1" data-label="Song (Tamil)">கலீல் நாதர் தங்கள்</td>
+          <td class="column-2" data-label="Lyricist">M Abdul Subahan Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/khaleel_naathar_thangal.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Aaruyir Guru Naathare</td>
-          <td class="column-1">ஆருயிர் குரு நாதரே</td>
-          <td class="column-2">Moulavi S.Peer Mohamed Yaseeni Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/aaruyir_guru_naathare.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Aaruyir Guru Naathare</td>
+          <td class="column-1" data-label="Song (Tamil)">ஆருயிர் குரு நாதரே</td>
+          <td class="column-2" data-label="Lyricist">Moulavi S.Peer Mohamed Yaseeni Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/aaruyir_guru_naathare.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Naatha Naatha</td>
-          <td class="column-1">நாதா நாதா</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/naatha_naatha.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Naatha Naatha</td>
+          <td class="column-1" data-label="Song (Tamil)">நாதா நாதா</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/naatha_naatha.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Ya Maulana</td>
-          <td class="column-1">யா மௌலானா</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Allah (S.W.T)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ya_maulana.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Ya Maulana</td>
+          <td class="column-1" data-label="Song (Tamil)">யா மௌலானா</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Allah (S.W.T)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ya_maulana.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Then Sinthidum Madhinavile</td>
-          <td class="column-1">தேன் சிந்திடும் மதினாவிலே</td>
-          <td class="column-2">Zuhair Ahamed Bilali</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/then_sinthidum_madinaavile.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Then Sinthidum Madhinavile</td>
+          <td class="column-1" data-label="Song (Tamil)">தேன் சிந்திடும் மதினாவிலே</td>
+          <td class="column-2" data-label="Lyricist">Zuhair Ahamed Bilali</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/then_sinthidum_madinaavile.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Naatharam Khaleel Awnin Naamam Koorungal</td>
-          <td class="column-1">நாதராம் கலீல் அவ்னின் நாமம் கூறுங்கள்</td>
-          <td class="column-2">U. Zahir Hussain Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/naatharam_khaleel_awnin.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Naatharam Khaleel Awnin Naamam Koorungal</td>
+          <td class="column-1" data-label="Song (Tamil)">நாதராம் கலீல் அவ்னின் நாமம் கூறுங்கள்</td>
+          <td class="column-2" data-label="Lyricist">U. Zahir Hussain Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/naatharam_khaleel_awnin.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Poo Nabi Nesame</td>
-          <td class="column-1">பூ நபி நேசமே</td>
-          <td class="column-2">ஐனுல் (Z)ஜாஹிரா ஆலிமா முஅஸ்கரிய்யா</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/poonabi_nesame.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Poo Nabi Nesame</td>
+          <td class="column-1" data-label="Song (Tamil)">பூ நபி நேசமே</td>
+          <td class="column-2" data-label="Lyricist">ஐனுல் (Z)ஜாஹிரா ஆலிமா முஅஸ்கரிய்யா</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/poonabi_nesame.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Mannar Khaleel Awn Em Guruve</td>
-          <td class="column-1">மன்னர் கலீல் அவ்ன் எம்குருவே</td>
-          <td class="column-2">கலீஃபா M.முஹம்மது முஸ்தபா ஹக்கிய்யுல் காதிரிய்</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/mannar_khaleel_awn_em_guruve.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Mannar Khaleel Awn Em Guruve</td>
+          <td class="column-1" data-label="Song (Tamil)">மன்னர் கலீல் அவ்ன் எம்குருவே</td>
+          <td class="column-2" data-label="Lyricist">கலீஃபா M.முஹம்மது முஸ்தபா ஹக்கிய்யுல் காதிரிய்</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/mannar_khaleel_awn_em_guruve.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Baghdadin Vennila</td>
-          <td class="column-1">பகுதாதின் வெண்ணிலா</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Quthbul Aktab Ghousul Alam Hazrat Sheikh Abdul Qadir Jilani (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/baghdadin_vennila.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Baghdadin Vennila</td>
+          <td class="column-1" data-label="Song (Tamil)">பகுதாதின் வெண்ணிலா</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Quthbul Aktab Ghousul Alam Hazrat Sheikh Abdul Qadir Jilani (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/baghdadin_vennila.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Ya Rasoole Khuda</td>
-          <td class="column-1">யா ரஸுலே ஹுதா</td>
-          <td class="column-2">Maadihur Rasool Ensemble</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ya_rasoole_huda.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Ya Rasoole Khuda</td>
+          <td class="column-1" data-label="Song (Tamil)">யா ரஸுலே ஹுதா</td>
+          <td class="column-2" data-label="Lyricist">Maadihur Rasool Ensemble</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ya_rasoole_huda.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Kannadi Guruve</td>
-          <td class="column-1">கண்ணாடி குருவே</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/kannadi_guruve.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Kannadi Guruve</td>
+          <td class="column-1" data-label="Song (Tamil)">கண்ணாடி குருவே</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/kannadi_guruve.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Ya Nabi Ya Habeeb</td>
-          <td class="column-1">யா நபி யா ஹபீப்</td>
-          <td class="column-2">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ya_nabi_ya_habeeb.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Ya Nabi Ya Habeeb</td>
+          <td class="column-1" data-label="Song (Tamil)">யா நபி யா ஹபீப்</td>
+          <td class="column-2" data-label="Lyricist">A Muhammed Madhih Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ya_nabi_ya_habeeb.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Engal Awn Naayagam</td>
-          <td class="column-1">எங்கள் அவ்ன் நாயகம்</td>
-          <td class="column-2">செய்யிது மாதிஹ் மௌலானா</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/engal_awn_naayagam.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Engal Awn Naayagam</td>
+          <td class="column-1" data-label="Song (Tamil)">எங்கள் அவ்ன் நாயகம்</td>
+          <td class="column-2" data-label="Lyricist">செய்யிது மாதிஹ் மௌலானா</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/engal_awn_naayagam.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Emakkarulveer Nayagame</td>
-          <td class="column-1">எமக்கருள்வீர் நாயகமே!</td>
-          <td class="column-2">A.N.M Mohamed Yusuf Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/emakkarulveer_nayagame.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Emakkarulveer Nayagame</td>
+          <td class="column-1" data-label="Song (Tamil)">எமக்கருள்வீர் நாயகமே!</td>
+          <td class="column-2" data-label="Lyricist">A.N.M Mohamed Yusuf Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/emakkarulveer_nayagame.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Ullamai Sooriyano Yaseen Uruvaai Uthikkirathe</td>
-          <td class="column-1">உள்ளமைச் சூரியனோ யாஸீன் உருவாய் உதிக்கிறதே!</td>
-          <td class="column-2">Seyyadhu Mufeel Moulana Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ullamai_sooriyano_yaseen_uruvai_uthikkinrathe.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Ullamai Sooriyano Yaseen Uruvaai Uthikkirathe</td>
+          <td class="column-1" data-label="Song (Tamil)">உள்ளமைச் சூரியனோ யாஸீன் உருவாய் உதிக்கிறதே!</td>
+          <td class="column-2" data-label="Lyricist">Seyyadhu Mufeel Moulana Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ullamai_sooriyano_yaseen_uruvai_uthikkinrathe.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Nallatchi Naadi Ninra Naayagame</td>
-          <td class="column-1">நல்லாட்சி நாடி நின்ற நாயகமே!</td>
-          <td class="column-2">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Karbala</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/nallatchi_naadi_ninra_naayagar.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Nallatchi Naadi Ninra Naayagame</td>
+          <td class="column-1" data-label="Song (Tamil)">நல்லாட்சி நாடி நின்ற நாயகமே!</td>
+          <td class="column-2" data-label="Lyricist">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Karbala</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/nallatchi_naadi_ninra_naayagar.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Ennam Ellam Ennuyire</td>
-          <td class="column-1">எண்ணம் எல்லாம் என்னுயிரே</td>
-          <td class="column-2">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/ennam_ellam_ennuyire.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Ennam Ellam Ennuyire</td>
+          <td class="column-1" data-label="Song (Tamil)">எண்ணம் எல்லாம் என்னுயிரே</td>
+          <td class="column-2" data-label="Lyricist">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/ennam_ellam_ennuyire.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Mannil Vantha Arule</td>
-          <td class="column-1">மண்ணில் வந்த அருளே</td>
-          <td class="column-2">Jahabar Sathik Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/mannil_vantha_arule.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Mannil Vantha Arule</td>
+          <td class="column-1" data-label="Song (Tamil)">மண்ணில் வந்த அருளே</td>
+          <td class="column-2" data-label="Lyricist">Jahabar Sathik Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/mannil_vantha_arule.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Thirumullai Thirunagar Vaazhum</td>
-          <td class="column-1">திருமுல்லை திருநகர் வாழும்</td>
-          <td class="column-2">பின்த் முஸ்தபா மதுக்கூர்</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/thirumullai_thirunagar_vaazhum.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Thirumullai Thirunagar Vaazhum</td>
+          <td class="column-1" data-label="Song (Tamil)">திருமுல்லை திருநகர் வாழும்</td>
+          <td class="column-2" data-label="Lyricist">பின்த் முஸ்தபா மதுக்கூர்</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Moulana Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/thirumullai_thirunagar_vaazhum.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Adipaninthome Em Guruve</td>
-          <td class="column-1">அடிபணிந்தோமே எம்குருவே</td>
-          <td class="column-2">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/adipaninthome.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Adipaninthome Em Guruve</td>
+          <td class="column-1" data-label="Song (Tamil)">அடிபணிந்தோமே எம்குருவே</td>
+          <td class="column-2" data-label="Lyricist">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/adipaninthome.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Sambai Vazhi Santhanme</td>
-          <td class="column-1">சம்பை வழி சந்தனமே</td>
-          <td class="column-2">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/sambai_vazhi_santhaname.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Sambai Vazhi Santhanme</td>
+          <td class="column-1" data-label="Song (Tamil)">சம்பை வழி சந்தனமே</td>
+          <td class="column-2" data-label="Lyricist">Aalim Pulavar S. Hussain Mohamed Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Yaseen Ali Nayagam Al Qadiri-ul Hasani-ul Hussaini-ul Hashimi(R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/sambai_vazhi_santhaname.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Nabi Pugal Paadave</td>
-          <td class="column-1">நபிபுகழ் பாடவா</td>
-          <td class="column-2">A. நூருல் நய்மா அனஸ்</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/nabi_pugal_paadava.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Nabi Pugal Paadave</td>
+          <td class="column-1" data-label="Song (Tamil)">நபிபுகழ் பாடவா</td>
+          <td class="column-2" data-label="Lyricist">A. நூருல் நய்மா அனஸ்</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/nabi_pugal_paadava.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Tala'a Al-Badru 'Alayna</td>
-          <td class="column-1">தலஅல் பத்ரு அலைனா</td>
-          <td class="column-2">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/thala_al_badru_tamil.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Tala'a Al-Badru 'Alayna</td>
+          <td class="column-1" data-label="Song (Tamil)">தலஅல் பத்ரு அலைனா</td>
+          <td class="column-2" data-label="Lyricist">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/thala_al_badru_tamil.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Meeladhun Nabi Vizha</td>
-          <td class="column-1">மீலாதுன்னபி விழா</td>
-          <td class="column-2">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/meeladhun_nabi_vizha.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Meeladhun Nabi Vizha</td>
+          <td class="column-1" data-label="Song (Tamil)">மீலாதுன்னபி விழா</td>
+          <td class="column-2" data-label="Lyricist">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/meeladhun_nabi_vizha.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Anbe Aaruyire</td>
-          <td class="column-1">அன்பே ஆருயிரே</td>
-          <td class="column-2">H.Raajiyammal Melathiruppoonthuruthi</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/anbe_aaruyire.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Anbe Aaruyire</td>
+          <td class="column-1" data-label="Song (Tamil)">அன்பே ஆருயிரே</td>
+          <td class="column-2" data-label="Lyricist">H.Raajiyammal Melathiruppoonthuruthi</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/anbe_aaruyire.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Sambai Nagar Naadi</td>
-          <td class="column-1">சம்பை நகர் நாடி</td>
-          <td class="column-2">பின்த் முஸ்தபா மதுக்கூர்</td>
-          <td class="column-3">HHH Jamaliya As-Syed Mohamed Moulana (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/sambai_nagar_naadi.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Sambai Nagar Naadi</td>
+          <td class="column-1" data-label="Song (Tamil)">சம்பை நகர் நாடி</td>
+          <td class="column-2" data-label="Lyricist">பின்த் முஸ்தபா மதுக்கூர்</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Mohamed Moulana (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/sambai_nagar_naadi.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Aathi Anthamaai</td>
-          <td class="column-1">ஆதி அந்தமாய்</td>
-          <td class="column-2">பின்த் முஸ்தபா மதுக்கூர்</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/aathi_anthamaai.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Aathi Anthamaai</td>
+          <td class="column-1" data-label="Song (Tamil)">ஆதி அந்தமாய்</td>
+          <td class="column-2" data-label="Lyricist">பின்த் முஸ்தபா மதுக்கூர்</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/aathi_anthamaai.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Maru Malarchi</td>
-          <td class="column-1">மறு மலர்ச்சி</td>
-          <td class="column-2">S. Abdul Majeed Haqqiyathul Qadiriyah Dindigul</td>
-          <td class="column-3">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/maru_malarchi.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Maru Malarchi</td>
+          <td class="column-1" data-label="Song (Tamil)">மறு மலர்ச்சி</td>
+          <td class="column-2" data-label="Lyricist">S. Abdul Majeed Haqqiyathul Qadiriyah Dindigul</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Sheikh Vappa Nayagam Quthbuzzaman Shamsul Wujoodh Jamaliya Asseyed Khaleel Awn Mowlana El Hasaniyyul Husainiyyul Hashimy Esq (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/maru_malarchi.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Madina Manalveli Yengum</td>
-          <td class="column-1">மதீனா மணல்வெளியெங்கும்</td>
-          <td class="column-2">Mahshook Rahman</td>
-          <td class="column-3">Prophet Muhammad (ﷺ)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/madina_manal.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Madina Manalveli Yengum</td>
+          <td class="column-1" data-label="Song (Tamil)">மதீனா மணல்வெளியெங்கும்</td>
+          <td class="column-2" data-label="Lyricist">Mahshook Rahman</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">Prophet Muhammad (ﷺ)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/madina_manal.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         <tr>
-          <td class="column-0">Sambai Nagar Jolikkirathu</td>
-          <td class="column-1">சம்பை நகர் ஜொலிக்கிறது</td>
-          <td class="column-2">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
-          <td class="column-3">HHH Jamaliya As-Syed Mohamed Moulana (R.A)</td>
-          <td class="column-4"><i class="fas fa-eye view-icon" onclick="viewLyrics('lyrics/sambai_nagar_jolikkirathu.html')"></i></td>
+          <td class="column-0" data-label="Song (English)">Sambai Nagar Jolikkirathu</td>
+          <td class="column-1" data-label="Song (Tamil)">சம்பை நகர் ஜொலிக்கிறது</td>
+          <td class="column-2" data-label="Lyricist">Ilangavi A.Nainar Mohamed Ansari Haqqiyathul Qadiriyah</td>
+          <td class="column-3" data-label="In Praise/Remembrance Of">HHH Jamaliya As-Syed Mohamed Moulana (R.A)</td>
+          <td class="column-4"><button type="button" class="view-btn" onclick="viewLyrics('lyrics/sambai_nagar_jolikkirathu.html')"><i class="fas fa-eye" aria-hidden="true"></i></button></td>
         </tr>
         </tbody>
       </table>
@@ -1201,74 +514,146 @@ img {
     </section>
   </main>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      sortTable(0); 
-    });
-  
-    function toggleColumn(index) {
-      const headers = document.querySelectorAll('.responsive-table th');
-      const cells = document.querySelectorAll(`.responsive-table .column-${index}`);
-      
-      headers[index].classList.toggle('collapsed');
-      cells.forEach(cell => {
-        cell.classList.toggle('collapsed');
-      });
-    }
-  
-    function resetTable() {
-      const headers = document.querySelectorAll('.responsive-table th');
-      const cells = document.querySelectorAll('.responsive-table td');
-  
-      headers.forEach(header => header.classList.remove('collapsed'));
-      cells.forEach(cell => cell.classList.remove('collapsed'));
-    }
-  
     function viewLyrics(url) {
       window.location.href = url;
     }
-  
+
+    /* ---------- sorting ---------- */
     let currentSortColumn = -1;
     let currentSortDirection = 'asc';
-    
+
     function sortTable(n) {
       const table = document.querySelector('.responsive-table');
       const rows = Array.from(table.querySelectorAll('tbody tr'));
-      let dir = currentSortColumn === n && currentSortDirection === 'asc' ? 'desc' : 'asc';
-    
+      const dir = currentSortColumn === n && currentSortDirection === 'asc' ? 'desc' : 'asc';
+
       rows.sort((a, b) => {
         const x = a.cells[n].innerText.toLowerCase();
         const y = b.cells[n].innerText.toLowerCase();
-        if (x < y) {
-          return dir === 'asc' ? -1 : 1;
-        }
-        if (x > y) {
-          return dir === 'asc' ? 1 : -1;
-        }
+        if (x < y) return dir === 'asc' ? -1 : 1;
+        if (x > y) return dir === 'asc' ? 1 : -1;
         return 0;
       });
-    
+
       rows.forEach(row => table.querySelector('tbody').appendChild(row));
-    
       currentSortColumn = n;
       currentSortDirection = dir;
-    }
-  
-    document.getElementById('search-input').addEventListener('keyup', function() {
-      const filter = this.value.toLowerCase();
-      const rows = document.querySelectorAll('.responsive-table tbody tr');
-  
-      rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        let match = false;
-  
-        cells.forEach(cell => {
-          if (cell.textContent.toLowerCase().includes(filter)) {
-            match = true;
-          }
-        });
-  
-        row.style.display = match ? '' : 'none';
+
+      const headers = table.querySelectorAll('thead th');
+      headers.forEach((th, i) => {
+        if (i !== n) {
+          th.removeAttribute('aria-sort');
+          const icon = th.querySelector('.sort-icon');
+          if (icon) icon.className = 'bx bx-sort-alt-2 sort-icon';
+          return;
+        }
+        th.setAttribute('aria-sort', dir === 'asc' ? 'ascending' : 'descending');
+        const icon = th.querySelector('.sort-icon');
+        if (icon) icon.className = 'bx ' + (dir === 'asc' ? 'bx-sort-up' : 'bx-sort-down') + ' sort-icon';
       });
+    }
+
+    /* ---------- column show/hide ---------- */
+    function toggleColumn(index, forceVisible) {
+      const header = document.querySelectorAll('.responsive-table th')[index];
+      const cells = document.querySelectorAll(`.responsive-table .column-${index}`);
+      const chip = document.querySelector(`[data-column-toggle="${index}"]`);
+      const visible = forceVisible !== undefined ? forceVisible : header.classList.contains('collapsed');
+
+      header.classList.toggle('collapsed', !visible);
+      cells.forEach(cell => cell.classList.toggle('collapsed', !visible));
+      if (chip) chip.setAttribute('aria-pressed', String(visible));
+    }
+
+    document.querySelectorAll('[data-column-toggle]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const index = chip.getAttribute('data-column-toggle');
+        const nowVisible = chip.getAttribute('aria-pressed') !== 'true';
+        toggleColumn(index, nowVisible);
+      });
+    });
+
+    /* ---------- quick filters: who/what each song is about ---------- */
+    const activeTopics = new Set();
+    const topicKeywords = {
+      muhammad: ['muhammad'],
+      allah: ['allah'],
+      karbala: ['karbala'],
+      eid: ['eid'],
+      // Specific named Sheikhs/Awliya rather than one generic bucket.
+      // Phrases are picked so they don't cross-match each other -
+      // e.g. "yaseen moulana" never appears inside the "Yaseen Ali
+      // Nayagam..." honorific string, and vice versa.
+      'yaseen-moulana': ['yaseen moulana'],
+      'yaseen-ali-moulana': ['yaseen ali'],
+      'khaleel-awn-mowlana': ['khaleel awn'],
+      'mohamed-moulana': ['mohamed moulana'],
+      'abdul-qadir-jilani': ['abdul qadir jilani'],
+    };
+
+    function rowTopics(row) {
+      const text = (row.cells[3] ? row.cells[3].textContent : '').toLowerCase();
+      return Object.keys(topicKeywords).filter(topic =>
+        topicKeywords[topic].some(kw => text.includes(kw))
+      );
+    }
+
+    document.querySelectorAll('[data-topic]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const topic = chip.getAttribute('data-topic');
+        const pressed = chip.getAttribute('aria-pressed') === 'true';
+        if (pressed) activeTopics.delete(topic);
+        else activeTopics.add(topic);
+        chip.setAttribute('aria-pressed', String(!pressed));
+        applyTableFilters();
+      });
+    });
+
+    /* ---------- search + topic filters combined ---------- */
+    function applyTableFilters() {
+      const filter = (document.getElementById('search-input').value || '').toLowerCase();
+      const rows = document.querySelectorAll('.responsive-table tbody tr');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const matchesQuery =
+          filter === '' ||
+          Array.from(row.querySelectorAll('td')).some(cell =>
+            cell.textContent.toLowerCase().includes(filter)
+          );
+        const matchesTopic =
+          activeTopics.size === 0 ||
+          rowTopics(row).some(t => activeTopics.has(t));
+
+        const visible = matchesQuery && matchesTopic;
+        row.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
+      });
+
+      const noResults = document.getElementById('table-no-results');
+      if (noResults) noResults.hidden = visibleCount > 0;
+    }
+
+    document.getElementById('search-input').addEventListener('keyup', applyTableFilters);
+
+    /* ---------- reset ---------- */
+    document.getElementById('table-reset').addEventListener('click', () => {
+      document.getElementById('search-input').value = '';
+      activeTopics.clear();
+      document.querySelectorAll('[data-topic]').forEach(chip => chip.setAttribute('aria-pressed', 'false'));
+      [0, 1, 2, 3].forEach(i => toggleColumn(i, true));
+      applyTableFilters();
+    });
+
+    /* ---------- give each "view" button a real accessible name ---------- */
+    document.querySelectorAll('.responsive-table tbody tr').forEach(row => {
+      const title = row.cells[0] ? row.cells[0].textContent.trim() : '';
+      const btn = row.querySelector('.view-btn');
+      if (btn && title) btn.setAttribute('aria-label', 'View lyrics for ' + title);
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      sortTable(0);
     });
   </script>
   <script src="assets/js/theme.js"></script>

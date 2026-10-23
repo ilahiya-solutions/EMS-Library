@@ -158,9 +158,21 @@ document.querySelectorAll(".menu__content").forEach(function (card) {
     var lang = langEl ? langEl.textContent.trim() : "";
 
     try {
+      var pressedChips = Array.prototype.map.call(
+        document.querySelectorAll('.filter-chip[aria-pressed="true"]'),
+        function (c) {
+          return c.hasAttribute("data-filter-lang")
+            ? "lang:" + c.getAttribute("data-filter-lang")
+            : "category:" + c.getAttribute("data-filter-category");
+        }
+      );
       sessionStorage.setItem(
         "ems-return-state",
-        JSON.stringify({ query: searchInput ? searchInput.value : "", scrollY: window.scrollY })
+        JSON.stringify({
+          query: searchInput ? searchInput.value : "",
+          filters: pressedChips,
+          scrollY: window.scrollY,
+        })
       );
     } catch (err) {}
 
@@ -177,10 +189,19 @@ document.querySelectorAll(".menu__content").forEach(function (card) {
     try {
       var saved = JSON.parse(sessionStorage.getItem("ems-return-state") || "null");
       if (saved) {
-        if (searchInput && saved.query) {
-          searchInput.value = saved.query;
-          if (typeof myFunction === "function") myFunction();
-        }
+        if (searchInput && saved.query) searchInput.value = saved.query;
+
+        (saved.filters || []).forEach(function (key) {
+          var isLang = key.indexOf("lang:") === 0;
+          var value = key.slice(key.indexOf(":") + 1);
+          var selector = isLang
+            ? '[data-filter-lang="' + value + '"]'
+            : '[data-filter-category="' + value + '"]';
+          var chip = document.querySelector(selector);
+          if (chip) chip.click(); // toggles its own state + re-runs myFunction
+        });
+
+        if (typeof myFunction === "function") myFunction();
         window.scrollTo(0, saved.scrollY || 0);
         sessionStorage.removeItem("ems-return-state");
       }

@@ -739,6 +739,232 @@ summary:focus-visible,
   }
 }
 
+/*========== CATALOGUE FILTERS ==========*/
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin: var(--mb-3) 0;
+  padding: 0.75rem 1rem;
+  background-color: var(--container-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+}
+.filters__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.filters__label {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--text-color-light);
+  margin-right: 0.15rem;
+}
+.filter-chip {
+  min-height: 44px;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background-color: var(--body-color);
+  color: var(--text-color);
+  font-size: var(--small-font-size);
+  cursor: pointer;
+}
+.filter-chip:hover {
+  border-color: var(--first-color);
+  color: var(--first-color);
+}
+.filter-chip[aria-pressed="true"] {
+  background-color: var(--first-color);
+  border-color: var(--first-color);
+  color: #fff;
+  font-weight: var(--font-semi-bold);
+}
+.filter-reset {
+  min-height: 44px;
+  padding: 0.4rem 0.9rem;
+  margin-left: auto;
+  border: none;
+  background: none;
+  color: var(--text-color-light);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: var(--small-font-size);
+}
+.filter-reset:hover {
+  color: var(--first-color);
+}
+.no-results {
+  text-align: center;
+  color: var(--text-color-light);
+  padding: 2rem 1rem;
+}
+
+/*========== LYRICS TABLE (lyrics.html) ==========*/
+.table-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: var(--mb-3);
+}
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+.search-container input[type="text"] {
+  flex: 1 1 220px;
+  min-height: 44px;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  font-size: 1rem;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.search-container input[type="text"]::placeholder {
+  color: var(--text-color-light);
+}
+.search-container input[type="text"]:focus {
+  border-color: var(--first-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+.search-container .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--first-color);
+  pointer-events: none;
+}
+
+.responsive-table-container {
+  overflow-x: auto;
+}
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--mb-4);
+}
+.responsive-table th,
+.responsive-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+.responsive-table th {
+  background-color: var(--first-color);
+  padding: 0;
+}
+.responsive-table th.view-col {
+  padding: 1rem;
+  color: #fff;
+  font-weight: var(--font-semi-bold);
+}
+.th-sort-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 1rem;
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: var(--font-semi-bold);
+  /* Always white: this sits on the permanently-green header background in
+     both themes, unlike var(--container-color) which used to flip to a
+     near-black card color in dark mode and vanish against the green. */
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+.th-sort-btn .sort-icon {
+  opacity: 0.85;
+  font-size: 1.1em;
+}
+
+.view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  color: var(--first-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.view-btn:hover {
+  border-color: var(--first-color);
+}
+
+.responsive-table td.collapsed,
+.responsive-table th.collapsed {
+  display: none;
+}
+
+/* Mobile: stack each row into a labeled card instead of a horizontally
+   scrolling table. With two free-text columns that can run 100+
+   characters (lyricist / "in praise of"), sideways-scrolling a 5-column
+   table on a phone was an uncomfortable way to read this list. */
+@media screen and (max-width: 700px) {
+  .responsive-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+  .responsive-table,
+  .responsive-table tbody,
+  .responsive-table tr {
+    display: block;
+    width: 100%;
+  }
+  .responsive-table tr {
+    margin-bottom: 1rem;
+    background-color: var(--container-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0;
+  }
+  .responsive-table td {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    justify-content: space-between;
+    text-align: right;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.6rem 1rem;
+  }
+  .responsive-table tr td:last-child {
+    border-bottom: none;
+  }
+  .responsive-table td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    text-align: left;
+    font-weight: var(--font-semi-bold);
+    color: var(--text-color-light);
+  }
+  .responsive-table td.column-4 {
+    justify-content: flex-end;
+  }
+  .responsive-table td.column-4::before {
+    content: none;
+  }
+}
+
 /*========== MGP (browse by year) ==========*/
 .mgp-years {
   display: flex;
