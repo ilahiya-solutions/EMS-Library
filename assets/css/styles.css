@@ -661,6 +661,7 @@ img {
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
+summary:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--first-color);
   outline-offset: 2px;
@@ -735,6 +736,58 @@ input:focus-visible,
     width: 100%;
     max-width: none;
     margin: 0;
+  }
+}
+
+/*========== MGP (browse by year) ==========*/
+.mgp-years {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: var(--mb-4);
+}
+.mgp-year {
+  background-color: var(--container-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.mgp-year > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 1rem 1.25rem;
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--title-color);
+}
+.mgp-year > summary::-webkit-details-marker {
+  display: none;
+}
+.mgp-year > summary::before {
+  content: "\25B8"; /* ▸ */
+  color: var(--first-color);
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+.mgp-year[open] > summary::before {
+  transform: rotate(90deg);
+}
+.mgp-year-count {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+  color: var(--text-color-light);
+}
+.mgp-year > .menu__container {
+  padding: 0 1.25rem 1.5rem;
+  margin-top: 0;
+}
+@media screen and (min-width: 768px) {
+  .mgp-year > .menu__container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 }
 

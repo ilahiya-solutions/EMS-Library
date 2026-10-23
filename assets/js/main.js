@@ -141,7 +141,10 @@ document.querySelectorAll(".menu__content").forEach(function (card) {
 
 /*==================== OPEN BOOKS IN THE READER ====================*/
 (function () {
-  var grid = document.getElementById("myUL");
+  // The catalogue spans three sections now (Kithab/Books grid, MGP grouped
+  // by year, Qaseedahs grid) instead of a single #myUL - delegate from the
+  // whole <main> so MGP's "open in reader" / search-restore keep working.
+  var grid = document.querySelector(".l-main");
   var searchInput = document.getElementById("myInput");
   if (!grid) return;
 
